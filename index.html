@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="Portfolio of Toheeb Goodluck Ogunade, focused on backend systems, distributed systems, and applied AI."
+    />
+    <meta
+      name="theme-color"
+      content="#0a0a0a"
+    />
+    <meta
+      property="og:title"
+      content="Toheeb Goodluck Ogunade | Backend, Distributed Systems, and AI"
+    />
+    <meta
+      property="og:description"
+      content="Portfolio of Toheeb Goodluck Ogunade, focused on backend systems, distributed systems, and applied AI."
+    />
+    <meta
+      property="og:type"
+      content="website"
+    />
+    <meta
+      property="og:image"
+      content="/og-image.svg"
+    />
+    <meta
+      property="og:site_name"
+      content="Toheeb Goodluck Ogunade"
+    />
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+    <meta
+      name="twitter:title"
+      content="Toheeb Goodluck Ogunade | Backend, Distributed Systems, and AI"
+    />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Toheeb Goodluck Ogunade, focused on backend systems, distributed systems, and applied AI."
+    />
+    <meta
+      name="twitter:image"
+      content="/og-image.svg"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <title>Toheeb Goodluck Ogunade</title>
+    <script>
+      const redirectPath = sessionStorage.getItem("portfolio_redirect_path");
+
+      if (redirectPath) {
+        sessionStorage.removeItem("portfolio_redirect_path");
+        window.history.replaceState(null, "", redirectPath);
+      }
+
+      const savedTheme = localStorage.getItem("theme");
+      document.documentElement.dataset.theme =
+        savedTheme === "light" ? "light" : "dark";
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

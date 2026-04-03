@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family:
+      Inter,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
+  body,
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+    letter-spacing: -0.01em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.03em;
+    font-weight: 500;
+  }
+}
+
+:root {
+  color-scheme: dark;
+  --canvas: 10 10 10;
+  --ink: 239 237 231;
+  --muted: 161 158 150;
+  --accent: 137 160 145;
+  --surface: 20 20 20;
+  --line: rgba(239, 237, 231, 0.1);
+  --code-bg: rgb(18 18 18);
+  --code-muted: #9aa3a2;
+  --code-keyword: #d6c28a;
+  --code-string: #9cc2ad;
+  --code-number: #d7a88e;
+  --code-title: #d7d4cb;
+  --code-comment: #6f746f;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --canvas: 247 245 239;
+  --ink: 17 17 17;
+  --muted: 106 106 99;
+  --accent: 77 91 81;
+  --surface: 239 236 229;
+  --line: rgba(17, 17, 17, 0.08);
+  --code-bg: rgb(236 232 223);
+  --code-muted: #5e625f;
+  --code-keyword: #7f5f13;
+  --code-string: #3b7158;
+  --code-number: #98553e;
+  --code-title: #1c1b18;
+  --code-comment: #7c7a73;
+}
+
+body {
+  margin: 0;
+  background: rgb(var(--canvas));
+  color: rgb(var(--ink));
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.24);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown-shell {
+  display: grid;
+  gap: 0.85rem;
+  font-family:
+    "Iowan Old Style",
+    "Palatino Linotype",
+    "Book Antiqua",
+    "New York",
+    Georgia,
+    ui-serif,
+    serif;
+  color: rgb(var(--ink) / 0.92);
+}
+
+.markdown-shell pre code.hljs {
+  background: var(--code-bg);
+  color: var(--code-title);
+}
+
+.markdown-shell code,
+.markdown-shell pre {
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+.markdown-shell h1,
+.markdown-shell h2,
+.markdown-shell h3,
+.markdown-shell strong,
+.markdown-shell a {
+  color: rgb(var(--ink));
+}
+
+.markdown-shell p,
+.markdown-shell li,
+.markdown-shell blockquote {
+  color: rgb(var(--ink) / 0.88);
+}
+
+.markdown-image-block {
+  margin: 0.45rem 0 0.7rem;
+}
+
+.markdown-gallery {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0.45rem 0 0.7rem;
+}
+
+.markdown-gallery[data-count="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.markdown-gallery[data-count="3"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.markdown-image-frame {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: rgb(var(--surface) / 0.72);
+}
+
+.markdown-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.markdown-image-caption {
+  padding: 0.85rem 1rem 0.95rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgb(var(--muted));
+}
+
+@media (max-width: 767px) {
+  .markdown-gallery {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.markdown-shell .hljs-comment,
+.markdown-shell .hljs-quote {
+  color: var(--code-comment);
+}
+
+.markdown-shell .hljs-keyword,
+.markdown-shell .hljs-selector-tag,
+.markdown-shell .hljs-literal,
+.markdown-shell .hljs-section,
+.markdown-shell .hljs-link {
+  color: var(--code-keyword);
+}
+
+.markdown-shell .hljs-string,
+.markdown-shell .hljs-attr,
+.markdown-shell .hljs-template-variable,
+.markdown-shell .hljs-bullet {
+  color: var(--code-string);
+}
+
+.markdown-shell .hljs-number,
+.markdown-shell .hljs-symbol,
+.markdown-shell .hljs-variable,
+.markdown-shell .hljs-meta {
+  color: var(--code-number);
+}
+
+.markdown-shell .hljs-title,
+.markdown-shell .hljs-function,
+.markdown-shell .hljs-title.class_ {
+  color: var(--code-title);
+}
+
+.markdown-shell .hljs-punctuation,
+.markdown-shell .hljs-operator,
+.markdown-shell .hljs-property,
+.markdown-shell .hljs-params {
+  color: var(--code-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

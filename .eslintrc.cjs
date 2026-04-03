@@ -1,0 +1,23 @@
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    node: true,
+    es2022: true,
+  },
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
+  ignorePatterns: ["dist", "node_modules", "generated"],
+  overrides: [
+    {
+      files: ["tests/**/*.ts"],
+      env: {
+        node: true,
+      },
+    },
+  ],
+};

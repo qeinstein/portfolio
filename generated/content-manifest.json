@@ -1,0 +1,124 @@
+{
+  "blogPosts": [
+    {
+      "slug": "velarix",
+      "title": "Velarix",
+      "date": "2026-04-03",
+      "excerpt": "Why I’m building Velarix and the problem I want it to solve for autonomous systems.",
+      "published": true,
+      "tags": [
+        "startup",
+        "reasoning systems",
+        "agents"
+      ],
+      "sourcePath": "/content/blog/velarix.md"
+    },
+    {
+      "slug": "distributed-systems-notes",
+      "title": "Designing Backpressure Before You Need It",
+      "date": "2026-03-22",
+      "excerpt": "A short note on why I care more about bounded queues and visible failure modes than theoretical throughput.",
+      "published": true,
+      "tags": [
+        "distributed systems",
+        "concurrency",
+        "operations"
+      ],
+      "sourcePath": "/content/blog/distributed-systems-notes.md"
+    }
+  ],
+  "projectEntries": [
+    {
+      "slug": "delta-autonomous-recursive-intelligence-system",
+      "title": "Delta",
+      "excerpt": "I built Delta as an autonomous local agent system around planning, persistent memory, sandboxed execution, and self-extension.",
+      "published": true,
+      "tags": [
+        "agents",
+        "autonomy",
+        "local ai",
+        "orchestration"
+      ],
+      "stack": [
+        "Python",
+        "Gemini",
+        "SQLite",
+        "RestrictedPython"
+      ],
+      "role": "AI systems engineer",
+      "status": "Active build",
+      "link": "",
+      "repo": "https://github.com/JohnOjure/Delta",
+      "sourcePath": "/content/projects/delta-autonomous-recursive-intelligence-system.md"
+    },
+    {
+      "slug": "intelligent-proxy-server",
+      "title": "Intelligent Proxy",
+      "excerpt": "I built this Python proxy server to combine request filtering, dynamic blocklists, caching, tunneling, and lightweight traffic controls.",
+      "published": true,
+      "tags": [
+        "networking",
+        "security",
+        "proxies",
+        "python"
+      ],
+      "stack": [
+        "Python",
+        "HTTP",
+        "Requests",
+        "ThreadingTCPServer"
+      ],
+      "role": "Backend and security engineer",
+      "status": "Working prototype",
+      "link": "",
+      "repo": "https://github.com/qeinstein/intelligent_proxy",
+      "sourcePath": "/content/projects/intelligent-proxy-server.md"
+    },
+    {
+      "slug": "model-context-protocol-server",
+      "title": "MCP Server",
+      "excerpt": "I built this Model Context Protocol server to expose tools, resources, and prompts for structured code exploration.",
+      "published": true,
+      "tags": [
+        "mcp",
+        "tooling",
+        "protocols",
+        "typescript"
+      ],
+      "stack": [
+        "TypeScript",
+        "Node.js",
+        "MCP",
+        "HTTP"
+      ],
+      "role": "Protocol and tooling engineer",
+      "status": "Usable foundation",
+      "link": "",
+      "repo": "https://github.com/777genius/claude-code-source-code/tree/main/mcp-server",
+      "sourcePath": "/content/projects/model-context-protocol-server.md"
+    },
+    {
+      "slug": "bounded-worker-pool",
+      "title": "Worker Pool",
+      "excerpt": "I built this bounded Go worker pool around explicit capacity, backpressure, and graceful shutdown.",
+      "published": true,
+      "tags": [
+        "concurrency",
+        "go",
+        "backpressure",
+        "infrastructure"
+      ],
+      "stack": [
+        "Go",
+        "Goroutines",
+        "Channels",
+        "Docker"
+      ],
+      "role": "Systems engineer",
+      "status": "Prototype shipped",
+      "link": "",
+      "repo": "https://github.com/qeinstein/worker_pool",
+      "sourcePath": "/content/projects/bounded-worker-pool.md"
+    }
+  ]
+}

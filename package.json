@@ -1,0 +1,38 @@
+{
+  "name": "toheeb-ogunade-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate:content": "node scripts/generate-content-manifest.mjs",
+    "dev": "npm run generate:content && vite",
+    "build": "npm run generate:content && tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "npm run generate:content && eslint . --ext .ts,.tsx,.mjs",
+    "test": "npm run generate:content && vitest run"
+  },
+  "dependencies": {
+    "framer-motion": "^11.18.2",
+    "gray-matter": "^4.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^6.30.1",
+    "rehype-highlight": "^7.0.2",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@typescript-eslint/eslint-plugin": "^8.58.0",
+    "@typescript-eslint/parser": "^8.58.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.2",
+    "vite": "^5.4.19",
+    "vitest": "^1.6.0"
+  }
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0A0A0A" />
+  <rect x="54" y="54" width="1092" height="522" rx="34" fill="#141414" stroke="#EFEDE7" stroke-opacity="0.12" />
+  <circle cx="1020" cy="126" r="54" fill="#89A091" fill-opacity="0.18" />
+  <circle cx="1084" cy="188" r="20" fill="#89A091" fill-opacity="0.24" />
+  <text x="110" y="188" fill="#A19E96" font-family="Inter, Arial, sans-serif" font-size="24" letter-spacing="7.2">
+    TOHEEB GOODLUCK OGUNADE
+  </text>
+  <text x="110" y="278" fill="#EFEDE7" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="600">
+    Backend Systems
+  </text>
+  <text x="110" y="356" fill="#EFEDE7" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="600">
+    Distributed Systems
+  </text>
+  <text x="110" y="434" fill="#EFEDE7" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="600">
+    Applied AI
+  </text>
+  <text x="110" y="512" fill="#89A091" font-family="Inter, Arial, sans-serif" font-size="28">
+    Case studies, writing, and production-oriented engineering work.
+  </text>
+</svg>
