@@ -26,7 +26,7 @@ export const portfolio = {
       "Contributor @lima. Currently exploring distributed systems, recursive AI agents, and deterministic system deployments."
   },
   about:
-    "I am a Software and AI Engineer with a strong focus on Go, Python, and scalable backend infrastructure. My work spans architecting Causal Engines for AI state management, deploying production-grade ML models, and containerizing distributed microservices. I am deeply interested in system architecture, high-concurrency execution (CSP), and NLP.",
+    "I am a Software and AI Engineer building the infrastructure of today to enable the breakthroughs of tomorrow. With a deep foundation in Go, Python, and CSP-based high-concurrency systems, I architect scalable backends that bridge the gap between engineering and AI research. My ultimate goal is to innovate at the intersection of AI/ML and quantum computing, pushing the boundaries of how we process and understand information.",
   experience: [
     {
       company: "Velarix",
