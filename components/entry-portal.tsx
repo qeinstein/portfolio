@@ -45,6 +45,26 @@ export function EntryPortal({ onEnter }: EntryPortalProps) {
   const size = useMemo(() => ({ width: 860, height: 460 }), []);
 
   useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (
+        (event.key !== "Enter" && event.key !== "NumpadEnter") ||
+        event.defaultPrevented ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.metaKey
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      onEnter();
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onEnter]);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
       return;
@@ -176,22 +196,25 @@ export function EntryPortal({ onEnter }: EntryPortalProps) {
   }, [size.height, size.width]);
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-canvas/92 px-4 py-6 backdrop-blur-sm">
-      <div className="ui-panel flex w-full max-w-3xl flex-col" style={{ maxHeight: "calc(100dvh - 3rem)" }}>
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-canvas/92 px-3 py-4 backdrop-blur-sm sm:px-4 sm:py-6">
+      <div
+        className="ui-panel flex w-full max-w-3xl flex-col overflow-hidden"
+        style={{ maxHeight: "calc(100dvh - 1.5rem)" }}
+      >
         {/* Text header — fixed, never scrolls away */}
-        <div className="shrink-0 px-6 pt-6 pb-4 md:px-8 md:pt-7">
+        <div className="shrink-0 px-4 pb-3 pt-5 sm:px-6 sm:pt-6 md:px-8 md:pt-7">
           <p className="text-[11px] uppercase tracking-[0.24em] text-muted">Portfolio</p>
-          <h1 className="mt-2 font-secondary text-2xl font-medium tracking-tight text-ink md:text-3xl">
+          <h1 className="mt-2 font-secondary text-xl font-medium tracking-tight text-ink sm:text-2xl md:text-3xl">
             Hi, I&apos;m {portfolio.meta.name}.
           </h1>
-          <p className="mt-2 text-sm leading-7 text-muted">
+          <p className="mt-2 text-[13px] leading-6 text-muted sm:text-sm sm:leading-7">
             Backend engineer and AI researcher — currently building{" "}
             <span className="text-ink">deterministic reasoning infrastructure for autonomous agents</span>.
           </p>
         </div>
 
         {/* Canvas — grows to fill available space, never overflows */}
-        <div className="min-h-0 flex-1 overflow-hidden border-y border-line bg-surface/40">
+        <div className="min-h-[180px] flex-1 overflow-hidden border-y border-line bg-surface/40 sm:min-h-0">
           <canvas
             ref={canvasRef}
             className="block h-full w-full object-cover"
@@ -201,11 +224,11 @@ export function EntryPortal({ onEnter }: EntryPortalProps) {
         </div>
 
         {/* Footer — always visible */}
-        <div className="shrink-0 flex items-center justify-end px-6 py-4 md:px-8">
+        <div className="shrink-0 flex items-center justify-stretch px-4 py-3 sm:justify-end sm:px-6 sm:py-4 md:px-8">
           <button
             type="button"
             onClick={onEnter}
-            className="inline-flex items-center gap-2 text-sm text-muted transition-colors duration-200 hover:text-ink"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-[var(--radius-md)] border border-line bg-surface/40 px-4 py-3 text-sm text-ink transition-colors duration-200 hover:bg-surface/60 sm:w-auto sm:justify-start sm:border-transparent sm:bg-transparent sm:px-0 sm:py-0 sm:text-muted sm:hover:bg-transparent sm:hover:text-ink"
           >
             Enter workspace
             <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

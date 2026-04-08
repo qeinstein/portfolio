@@ -20,6 +20,7 @@
       "Segoe UI",
       sans-serif;
     font-size: 15px;
+    -webkit-text-size-adjust: 100%;
   }
 
   body,
@@ -262,6 +263,7 @@ html[data-theme="vscode-dark"] {
 
 #root {
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 ::selection {
@@ -460,6 +462,19 @@ a {
   color: rgb(var(--ink));
 }
 
+.markdown-shell a,
+.markdown-shell p,
+.markdown-shell li,
+.markdown-shell blockquote,
+.markdown-shell td {
+  overflow-wrap: anywhere;
+}
+
+.markdown-shell :not(pre) > code {
+  white-space: normal;
+  word-break: break-word;
+}
+
 .markdown-shell p,
 .markdown-shell li,
 .markdown-shell blockquote {
@@ -568,6 +583,10 @@ a {
 }
 
 @media (max-width: 767px) {
+  .markdown-shell {
+    gap: 0.875rem;
+  }
+
   .markdown-gallery {
     grid-template-columns: 1fr !important;
   }
@@ -576,13 +595,24 @@ a {
     padding: 1rem;
   }
 
+  .markdown-image-frame {
+    border-radius: 1rem;
+  }
+
   .code-block-toolbar {
     flex-wrap: wrap;
     align-items: flex-start;
+    padding: 0.7rem 0.875rem;
   }
 
   .code-block-pre {
     padding: 0 0.875rem 0.875rem;
+  }
+
+  .code-block-pre code.hljs,
+  .code-block-pre code {
+    font-size: 0.8125rem;
+    line-height: 1.65;
   }
 }
 

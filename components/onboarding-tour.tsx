@@ -95,6 +95,7 @@ export function OnboardingTour({ onDone }: OnboardingTourProps) {
   const [pos, setPos] = useState<Pos>({ top: 0, left: 0, resolved: "center" });
 
   const current = STEPS[step];
+  const tooltipWidth = `min(${TOOLTIP_WIDTH}px, calc(100vw - 1.5rem))`;
 
   const measure = useCallback(() => {
     if (!current) return;
@@ -122,14 +123,14 @@ export function OnboardingTour({ onDone }: OnboardingTourProps) {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: TOOLTIP_WIDTH,
+        width: tooltipWidth,
         zIndex: 9998,
       }
     : {
         position: "fixed",
         top: pos.top,
         left: pos.left,
-        width: TOOLTIP_WIDTH,
+        width: tooltipWidth,
         zIndex: 9998,
       };
 
@@ -152,7 +153,7 @@ export function OnboardingTour({ onDone }: OnboardingTourProps) {
 
       {/* Progress dots */}
       <div
-        className="fixed bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-1.5"
+        className="fixed bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-1.5 sm:bottom-8"
         style={{ zIndex: 9999, pointerEvents: "none" }}
       >
         {STEPS.map((s, i) => (

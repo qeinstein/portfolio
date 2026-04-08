@@ -25,6 +25,11 @@ export type FileDescriptor = {
   load: () => Promise<string>;
 };
 
+function normalizePathname(pathname: string) {
+  const trimmed = pathname.replace(/\/+$/, "");
+  return trimmed === "" ? "/" : trimmed;
+}
+
 function stripFrontmatter(raw: string) {
   return raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "").trim();
 }
@@ -161,6 +166,88 @@ export function getExplorerTree(): ExplorerNode[] {
       ],
     },
   ];
+}
+
+export function getPathnameForFileId(fileId: string) {
+  if (fileId === "welcome.md") {
+    return "/";
+  }
+
+  if (fileId === "about/who-i-am.md") {
+    return "/who-i-am";
+  }
+
+  if (fileId === "about/experience.md") {
+    return "/experiences";
+  }
+
+  if (fileId === "about/contact.md") {
+    return "/contact";
+  }
+
+  if (fileId === "projects/index.md") {
+    return "/projects";
+  }
+
+  if (fileId.startsWith("projects/") && fileId.endsWith(".md")) {
+    const slug = fileId.replace(/^projects\//, "").replace(/\.md$/, "");
+    return `/projects/${slug}`;
+  }
+
+  if (fileId === "blog/index.md") {
+    return "/blog";
+  }
+
+  if (fileId.startsWith("blog/") && fileId.endsWith(".md")) {
+    const slug = fileId.replace(/^blog\//, "").replace(/\.md$/, "");
+    return `/blog/${slug}`;
+  }
+
+  return "/";
+}
+
+export function getFileIdFromPathname(pathname: string) {
+  const normalized = normalizePathname(pathname);
+
+  if (normalized === "/") {
+    return "welcome.md";
+  }
+
+  if (normalized === "/who-i-am") {
+    return "about/who-i-am.md";
+  }
+
+  if (normalized === "/experience" || normalized === "/experiences") {
+    return "about/experience.md";
+  }
+
+  if (normalized === "/contact") {
+    return "about/contact.md";
+  }
+
+  if (normalized === "/projects") {
+    return "projects/index.md";
+  }
+
+  if (normalized.startsWith("/projects/")) {
+    const slug = normalized.replace(/^\/projects\//, "");
+    return projectEntries.some((entry) => entry.slug === slug)
+      ? `projects/${slug}.md`
+      : null;
+  }
+
+  if (normalized === "/blog") {
+    return "blog/index.md";
+  }
+
+  if (normalized.startsWith("/blog/")) {
+    const slug = normalized.replace(/^\/blog\//, "");
+    return blogPosts.some((entry) => entry.slug === slug)
+      ? `blog/${slug}.md`
+      : null;
+  }
+
+  return null;
 }
 
 export function getFileDescriptor(fileId: string): FileDescriptor | undefined {

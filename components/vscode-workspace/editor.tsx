@@ -95,7 +95,7 @@ function TabButton({
 }) {
   return (
     <div
-      className={`group flex min-w-0 shrink-0 items-center gap-1 rounded-t-[0.7rem] border border-b-0 pl-3 pr-1.5 transition-colors duration-200 ${
+      className={`group flex min-w-0 shrink-0 items-center gap-1 rounded-t-[0.7rem] border border-b-0 pl-2.5 pr-1 sm:pl-3 sm:pr-1.5 transition-colors duration-200 ${
         active
           ? "bg-[var(--vscode-tab-active)] text-ink shadow-[inset_0_2px_0_rgb(var(--accent)/0.55)]"
           : "bg-[var(--vscode-tab)] text-muted hover:text-ink"
@@ -107,15 +107,19 @@ function TabButton({
       <button
         type="button"
         onClick={onClick}
-        className="min-w-0 flex-1 py-2.5 text-left"
+        className="min-w-0 flex-1 py-2 text-left sm:py-2.5"
       >
-        <span className="block max-w-[220px] truncate font-mono text-[12px]">{title}</span>
+        <span className="block max-w-[140px] truncate font-mono text-[11px] sm:max-w-[220px] sm:text-[12px]">
+          {title}
+        </span>
       </button>
       <button
         type="button"
         onClick={onClose}
         className={`inline-flex h-7 w-7 items-center justify-center rounded-md transition-all duration-200 hover:bg-white/5 hover:text-ink focus-visible:opacity-100 ${
-          active ? "text-ink/80" : "text-muted opacity-0 group-hover:opacity-100"
+          active
+            ? "text-ink/80"
+            : "text-muted opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
         }`}
         aria-label={`Close ${title}`}
         title="Close"
@@ -206,7 +210,8 @@ export function VSCodeEditor({
 
   return (
     <div className="flex h-full min-h-0 min-w-0 flex-col">
-      <div className="workspace-scroll flex h-11 min-w-0 items-end gap-1 overflow-x-auto px-2 pt-2"
+      <div
+        className="workspace-scroll flex h-10 min-w-0 items-end gap-0.5 overflow-x-auto px-1.5 pt-1.5 sm:h-11 sm:gap-1 sm:px-2 sm:pt-2"
         style={{ borderBottom: "1px solid var(--vscode-border)" }}
       >
         <AnimatePresence initial={false}>
@@ -229,13 +234,13 @@ export function VSCodeEditor({
           ))}
         </AnimatePresence>
 
-        <div className="ml-auto flex items-center gap-2 px-2">
+        <div className="ml-auto flex items-center gap-1 px-1 sm:gap-2 sm:px-2">
           {activeTab?.kind === "file" ? (
             <>
               <button
                 type="button"
                 onClick={() => onCompare(activeTab.fileId)}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted hover:bg-white/5 hover:text-ink"
+                className="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted hover:bg-white/5 hover:text-ink sm:h-8 sm:w-8"
                 aria-label="Compare file"
                 title="Compare file"
               >
@@ -244,7 +249,7 @@ export function VSCodeEditor({
               <button
                 type="button"
                 onClick={() => onSplitRight(groupId, activeTab.id)}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted hover:bg-white/5 hover:text-ink"
+                className="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted hover:bg-white/5 hover:text-ink sm:h-8 sm:w-8"
                 aria-label="Split editor right"
                 title="Split editor right"
               >
@@ -252,7 +257,11 @@ export function VSCodeEditor({
               </button>
             </>
           ) : null}
-          <span className={`text-[11px] uppercase tracking-[0.22em] ${isActive ? "text-ink" : "text-muted"}`}>
+          <span
+            className={`hidden text-[11px] uppercase tracking-[0.22em] sm:inline ${
+              isActive ? "text-ink" : "text-muted"
+            }`}
+          >
             {groupId === "left" ? "Main" : "Split"}
           </span>
         </div>
@@ -260,7 +269,7 @@ export function VSCodeEditor({
 
       <div
         ref={scrollRef}
-        className="workspace-scroll relative min-h-0 flex-1 overflow-auto px-4 py-4 [scrollbar-gutter:stable] md:px-6 md:py-5"
+        className="workspace-scroll relative min-h-0 flex-1 overflow-auto px-3 py-3 [scrollbar-gutter:stable] sm:px-4 sm:py-4 md:px-6 md:py-5"
       >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
@@ -309,8 +318,8 @@ export function VSCodeEditor({
                 />
               </div>
             ) : contentState.status === "ready" ? (
-              <div className="mx-auto w-full max-w-5xl pb-8">
-                <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_176px]">
+              <div className="mx-auto w-full max-w-5xl pb-6 sm:pb-8">
+                <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_176px] xl:gap-10">
                   <div id={contentRootId} className="min-w-0">
                     <MarkdownContent
                       content={contentState.content}

@@ -1,12 +1,19 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import type { ThemeName } from "@/src/App";
 import { EntryPortal } from "@/components/entry-portal";
 import { OnboardingTour, TOUR_KEY } from "@/components/onboarding-tour";
 import { portfolio } from "@/lib/portfolio-data";
 import { vscodeThemes } from "@/lib/vscode-themes";
-import { getExplorerTree, getFileDescriptor, type ExplorerNode } from "@/lib/vscode-files";
+import {
+  getExplorerTree,
+  getFileDescriptor,
+  getFileIdFromPathname,
+  getPathnameForFileId,
+  type ExplorerNode,
+} from "@/lib/vscode-files";
 import { VSCodeEditor } from "@/components/vscode-workspace/editor";
 
 type VSCodeWorkspaceProps = {
@@ -57,6 +64,20 @@ type ExplorerSearchResult = {
 
 function createTabId() {
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+function createFileTab(fileId: string): EditorTab {
+  const descriptor = getFileDescriptor(fileId);
+  return {
+    id: createTabId(),
+    kind: "file",
+    fileId,
+    title: descriptor?.title ?? fileId.split("/").pop() ?? fileId,
+  };
+}
+
+function getActiveTab(group: EditorGroup) {
+  return group.tabs.find((tab) => tab.id === group.activeTabId) ?? group.tabs[0] ?? null;
 }
 
 // Markdown file icon — document with hash lines
@@ -665,9 +686,17 @@ function ExplorerPanel({
 }
 
 export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const tree = useMemo(() => getExplorerTree(), []);
   const flatExplorerEntries = useMemo(() => flattenExplorerTree(tree), [tree]);
-  const [hasEntered, setHasEntered] = useState(false);
+  const [hasEntered, setHasEntered] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return localStorage.getItem("workspace_entered") === "true";
+  });
   const [showTour, setShowTour] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem(TOUR_KEY) !== "true";
@@ -697,11 +726,11 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
   const [activeSearchIndex, setActiveSearchIndex] = useState(0);
   const [activeGroupId, setActiveGroupId] = useState<"left" | "right">("left");
   const [groups, setGroups] = useState<{ left: EditorGroup; right: EditorGroup | null }>(() => {
-    const welcome = getFileDescriptor("welcome.md");
-    const initialTab: EditorTab =
-      welcome
-        ? { id: createTabId(), kind: "file", fileId: welcome.fileId, title: welcome.title }
-        : { id: createTabId(), kind: "file", fileId: "welcome.md", title: "welcome.md" };
+    const initialFileId =
+      typeof window === "undefined"
+        ? "welcome.md"
+        : getFileIdFromPathname(window.location.pathname) ?? "welcome.md";
+    const initialTab = createFileTab(initialFileId);
 
     return {
       left: { id: "left", tabs: [initialTab], activeTabId: initialTab.id },
@@ -709,6 +738,7 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
     };
   });
   const resizeStateRef = useRef<{ startX: number; startWidth: number } | null>(null);
+  const routeSyncRef = useRef(false);
 
   useEffect(() => {
     if (hasEntered) {
@@ -826,14 +856,69 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
   }, [flatExplorerEntries, searchQuery]);
 
   const activeGroup = activeGroupId === "left" ? groups.left : groups.right ?? groups.left;
-  const activeTabTitle =
-    activeGroup.tabs.find((tab) => tab.id === activeGroup.activeTabId)?.title ?? "Portfolio";
+  const activeTab = getActiveTab(activeGroup);
+  const activeTabTitle = activeTab?.title ?? "Portfolio";
+  const activePathname =
+    activeTab?.kind === "file" ? getPathnameForFileId(activeTab.fileId) : null;
 
   useEffect(() => {
     setActiveSearchIndex((current) =>
       searchResults.length === 0 ? 0 : Math.min(current, searchResults.length - 1)
     );
   }, [searchResults.length]);
+
+  useEffect(() => {
+    const routeFileId = getFileIdFromPathname(location.pathname);
+    if (!routeFileId) {
+      return;
+    }
+
+    if (routeSyncRef.current) {
+      routeSyncRef.current = false;
+      return;
+    }
+
+    setActiveGroupId("left");
+    setGroups((current) => {
+      const existing = current.left.tabs.find(
+        (tab) => tab.kind === "file" && tab.fileId === routeFileId
+      );
+
+      if (existing) {
+        if (current.left.activeTabId === existing.id) {
+          return current;
+        }
+
+        return {
+          ...current,
+          left: {
+            ...current.left,
+            activeTabId: existing.id,
+          },
+        };
+      }
+
+      const nextTab = createFileTab(routeFileId);
+
+      return {
+        ...current,
+        left: {
+          ...current.left,
+          tabs: [...current.left.tabs, nextTab],
+          activeTabId: nextTab.id,
+        },
+      };
+    });
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!activePathname || activePathname === location.pathname) {
+      return;
+    }
+
+    routeSyncRef.current = true;
+    navigate(activePathname);
+  }, [activePathname, location.pathname, navigate]);
 
   function toggleFolder(id: string) {
     setOpenFolders((current) => {
@@ -897,12 +982,7 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
           : { ...current, right: current.right ? nextGroup : current.right };
       }
 
-      const nextTab: EditorTab = {
-        id: createTabId(),
-        kind: "file",
-        fileId,
-        title: descriptor.title,
-      };
+      const nextTab = createFileTab(fileId);
 
       const nextGroup = {
         ...target,
@@ -1005,9 +1085,12 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
         ? "Main view"
         : "Split view";
 
+  const showLeftEditorOnMobile = !groups.right || activeGroupId === "left";
+  const showRightEditorOnMobile = Boolean(groups.right) && activeGroupId === "right";
+
   return (
     <div
-      className="h-[100dvh] overflow-hidden"
+      className="h-[100dvh] overflow-hidden overscroll-none"
       style={{
         background: "var(--vscode-bg)",
         color: "rgb(var(--ink))",
@@ -1025,12 +1108,12 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
 
       <div className="flex h-[calc(100dvh-var(--workspace-statusbar-height))] min-h-0 flex-col md:flex-row">
         <div
-          className="flex h-[var(--workspace-titlebar-height)] items-center justify-between gap-3 border-b px-3 md:hidden"
+          className="flex h-[var(--workspace-titlebar-height)] items-center justify-between gap-2 border-b px-2.5 md:hidden"
           style={{ background: "var(--vscode-panel)", borderColor: "var(--vscode-border)" }}
         >
           <button
             type="button"
-            className="ui-ghost-control h-9 w-9 shrink-0"
+            className="ui-ghost-control h-8 w-8 shrink-0"
             aria-label="Open sidebar"
             title="Open sidebar"
             onClick={() => setIsMobileExplorerOpen(true)}
@@ -1038,14 +1121,16 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
             <ActivityIcon />
           </button>
           <div className="min-w-0 flex-1">
-            <p className="truncate font-mono text-[12px] text-ink">{activeTabTitle}</p>
+            <p className="truncate font-mono text-[11px] text-ink sm:text-[12px]">
+              {activeTabTitle}
+            </p>
             <p className="truncate text-[10px] uppercase tracking-[0.18em] text-muted">
               {compareSource ? "Compare mode" : statusLabel}
             </p>
           </div>
           <button
             type="button"
-            className="ui-ghost-control h-9 w-9 shrink-0"
+            className="ui-ghost-control h-8 w-8 shrink-0"
             aria-label="Open settings"
             title="Open settings"
             onClick={() => setIsSettingsOpen(true)}
@@ -1182,12 +1267,14 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
         <div className="min-h-0 min-w-0 flex-1">
           <div
             className={`grid h-full min-h-0 gap-px ${
-              groups.right ? "grid-rows-2 xl:grid-cols-2 xl:grid-rows-1" : "grid-cols-1"
+              groups.right
+                ? "grid-cols-1 md:grid-rows-2 xl:grid-cols-2 xl:grid-rows-1"
+                : "grid-cols-1"
             }`}
             style={{ background: "var(--vscode-border)" }}
           >
             <div
-              className="min-h-0 min-w-0"
+              className={`min-h-0 min-w-0 ${showLeftEditorOnMobile ? "block" : "hidden md:block"}`}
               style={{ background: "var(--vscode-bg)" }}
               onMouseDown={() => setActiveGroupId("left")}
             >
@@ -1204,7 +1291,7 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
             </div>
             {groups.right ? (
               <div
-                className="min-h-0 min-w-0"
+                className={`min-h-0 min-w-0 ${showRightEditorOnMobile ? "block" : "hidden md:block"}`}
                 style={{ background: "var(--vscode-bg)" }}
                 onMouseDown={() => setActiveGroupId("right")}
               >
@@ -1225,7 +1312,7 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
       </div>
 
       <div
-        className="flex h-[var(--workspace-statusbar-height)] items-center justify-between gap-3 border-t px-3 text-[11px] md:px-4"
+        className="flex h-[var(--workspace-statusbar-height)] items-center justify-between gap-2 border-t px-2.5 text-[10px] md:px-4 md:text-[11px]"
         style={{
           background: "var(--vscode-status)",
           color: "var(--vscode-status-text)",
@@ -1235,7 +1322,31 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
         <p className="truncate">
           {compareSource ? "Compare mode: choose another file" : statusLabel}
         </p>
-        <div className="flex min-w-0 items-center gap-3">
+        <div className="flex min-w-0 items-center gap-2 md:gap-3">
+          {groups.right ? (
+            <div className="inline-flex rounded-[0.45rem] bg-black/15 p-0.5 md:hidden">
+              <button
+                type="button"
+                onClick={() => setActiveGroupId("left")}
+                className={`rounded-[0.3rem] px-2 py-0.5 transition-colors duration-200 ${
+                  activeGroupId === "left" ? "bg-white/18 text-white" : "text-white/72"
+                }`}
+                aria-pressed={activeGroupId === "left"}
+              >
+                Main
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveGroupId("right")}
+                className={`rounded-[0.3rem] px-2 py-0.5 transition-colors duration-200 ${
+                  activeGroupId === "right" ? "bg-white/18 text-white" : "text-white/72"
+                }`}
+                aria-pressed={activeGroupId === "right"}
+              >
+                Split
+              </button>
+            </div>
+          ) : null}
           <button
             type="button"
             onClick={() => setIsSettingsOpen(true)}

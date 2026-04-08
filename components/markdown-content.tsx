@@ -197,7 +197,7 @@ export function MarkdownContent({ content, onOpenWorkspaceFile }: MarkdownConten
           a: ({ href, children }) => (
             <a
               href={href}
-              className="text-ink underline decoration-accent/60 underline-offset-4 transition-opacity duration-200 hover:opacity-75"
+              className="break-words text-ink underline decoration-accent/60 underline-offset-4 transition-opacity duration-200 hover:opacity-75"
               onClick={(event) => {
                 if (!href) {
                   return;
@@ -219,11 +219,29 @@ export function MarkdownContent({ content, onOpenWorkspaceFile }: MarkdownConten
             className ? (
               <CodeBlock className={className}>{children}</CodeBlock>
             ) : (
-              <code className="rounded-md border border-line bg-surface/78 px-1.5 py-0.5 text-[0.92em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+              <code className="break-words rounded-md border border-line bg-surface/78 px-1.5 py-0.5 text-[0.92em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
                 {children}
               </code>
             ),
           pre: ({ children }) => <>{children}</>,
+          table: ({ children }) => (
+            <div className="workspace-scroll -mx-1 overflow-x-auto pb-1">
+              <table className="min-w-full border-collapse text-left text-sm leading-6 text-ink/90 md:text-[15px]">
+                {children}
+              </table>
+            </div>
+          ),
+          thead: ({ children }) => (
+            <thead className="border-b border-line bg-surface/28">{children}</thead>
+          ),
+          tbody: ({ children }) => <tbody className="divide-y divide-line">{children}</tbody>,
+          tr: ({ children }) => <tr className="align-top">{children}</tr>,
+          th: ({ children }) => (
+            <th className="whitespace-nowrap px-3 py-2.5 font-medium text-ink">
+              {children}
+            </th>
+          ),
+          td: ({ children }) => <td className="px-3 py-2.5 align-top">{children}</td>,
           img: ({ src, alt, title }) => (
             <figure className="markdown-image-frame">
               <img
