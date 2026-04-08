@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
 import { Experience, portfolio } from "@/lib/portfolio-data";
 
-import { FadeIn } from "./fade-in";
-
 type ExperienceItemProps = Experience & {
+  index: number;
   onOpen: (trigger: HTMLButtonElement) => void;
 };
 
@@ -15,47 +15,103 @@ function ExperienceItem({
   period,
   summary,
   blogSlug,
-  onOpen
+  featured,
+  index,
+  onOpen,
 }: ExperienceItemProps) {
   return (
-    <article className="py-4">
-      <div className="flex items-start justify-between gap-6">
-        <div className="space-y-1">
+    <motion.article
+      className="relative pl-9"
+      initial={{ opacity: 0, x: -10 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ delay: index * 0.07, duration: 0.44, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {/* Timeline dot */}
+      <span
+        className={`absolute left-0 top-[18px] flex h-4 w-4 items-center justify-center rounded-full border-2 transition-colors duration-300 ${
+          featured
+            ? "border-accent bg-accent/15 shadow-[0_0_10px_rgb(var(--accent)/0.3)]"
+            : "border-line bg-canvas"
+        }`}
+      >
+        {featured && (
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+        )}
+      </span>
+
+      <div className="pb-10">
+        {/* Header row */}
+        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
+          <div className="space-y-0.5">
+            {blogSlug ? (
+              <Link
+                to={`/blog/${blogSlug}`}
+                className="text-base font-medium text-ink transition-colors duration-200 hover:text-accent"
+              >
+                {company}
+              </Link>
+            ) : (
+              <h3 className="text-base font-medium text-ink">{company}</h3>
+            )}
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+              {role}
+            </p>
+          </div>
+          <span className="shrink-0 rounded-full border border-line bg-surface/50 px-2.5 py-0.5 font-mono text-[11px] text-muted">
+            {period}
+          </span>
+        </div>
+
+        {/* Summary */}
+        <p className="mt-3 text-sm leading-7 text-muted">{summary}</p>
+
+        {/* Actions */}
+        <div className="mt-3 flex flex-wrap items-center gap-4">
+          <button
+            type="button"
+            onClick={(e) => onOpen(e.currentTarget)}
+            className="group/btn inline-flex items-center gap-1.5 text-xs text-muted transition-colors duration-200 hover:text-ink"
+          >
+            Details
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-3 w-3 transition-transform duration-200 group-hover/btn:translate-x-0.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
+          </button>
           {blogSlug ? (
             <Link
               to={`/blog/${blogSlug}`}
-              className="text-lg font-medium tracking-tight text-ink transition-colors duration-200 hover:text-accent"
+              className="group/note inline-flex items-center gap-1.5 text-xs text-muted transition-colors duration-200 hover:text-ink"
             >
-              {company}
+              Founder note
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-3 w-3 transition-transform duration-200 group-hover/note:translate-x-0.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="M12 5l7 7-7 7" />
+              </svg>
             </Link>
-          ) : (
-            <h3 className="text-lg font-medium tracking-tight text-ink">{company}</h3>
-          )}
-          <p className="text-sm text-muted">{role}</p>
+          ) : null}
         </div>
-        <p className="shrink-0 text-sm text-muted">{period}</p>
       </div>
-      <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">{summary}</p>
-      <div className="mt-4 flex flex-wrap items-center gap-4">
-        <button
-          type="button"
-          onClick={(event) => {
-            onOpen(event.currentTarget);
-          }}
-          className="text-sm text-ink transition-opacity duration-200 hover:opacity-70"
-        >
-          Read details
-        </button>
-        {blogSlug ? (
-          <Link
-            to={`/blog/${blogSlug}`}
-            className="text-sm text-muted transition-colors duration-200 hover:text-ink"
-          >
-            Founder note
-          </Link>
-        ) : null}
-      </div>
-    </article>
+    </motion.article>
   );
 }
 
@@ -65,11 +121,7 @@ type ExperienceModalProps = {
   returnFocusTo: HTMLButtonElement | null;
 };
 
-function ExperienceModal({
-  item,
-  onClose,
-  returnFocusTo,
-}: ExperienceModalProps) {
+function ExperienceModal({ item, onClose, returnFocusTo }: ExperienceModalProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -84,35 +136,29 @@ function ExperienceModal({
         return;
       }
 
-      if (event.key !== "Tab" || !dialogRef.current) {
-        return;
-      }
+      if (event.key !== "Tab" || !dialogRef.current) return;
 
-      const focusableElements = Array.from(
+      const focusable = Array.from(
         dialogRef.current.querySelectorAll<HTMLElement>(
           'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
         )
-      ).filter((element) => !element.hasAttribute("disabled"));
+      ).filter((el) => !el.hasAttribute("disabled"));
 
-      if (focusableElements.length === 0) {
-        event.preventDefault();
-        return;
-      }
+      if (focusable.length === 0) { event.preventDefault(); return; }
 
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
 
-      if (event.shiftKey && document.activeElement === firstElement) {
+      if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
-        lastElement.focus();
-      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
         event.preventDefault();
-        firstElement.focus();
+        first.focus();
       }
     }
 
     window.addEventListener("keydown", onKeyDown);
-
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
@@ -121,22 +167,30 @@ function ExperienceModal({
   }, [onClose, returnFocusTo]);
 
   return (
-    <div
+    <motion.div
       className="fixed inset-0 z-50 flex items-end justify-center bg-canvas/84 px-4 py-6 backdrop-blur-sm md:items-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
       onClick={onClose}
       role="presentation"
     >
-      <div
+      <motion.div
         ref={dialogRef}
-        className="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-line bg-surface px-6 py-6 shadow-2xl shadow-black/30 md:px-8 md:py-8"
-        onClick={(event) => event.stopPropagation()}
+        className="max-h-[85vh] w-full max-w-2xl overflow-y-auto border border-line bg-canvas px-6 py-6 md:px-8 md:py-8"
+        initial={{ opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 16 }}
+        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+        onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="experience-dialog-title"
       >
         <div className="flex items-start justify-between gap-4">
-          <div className="space-y-2">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-muted">
+          <div className="space-y-1.5">
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted">
               Experience
             </p>
             <h3
@@ -163,9 +217,7 @@ function ExperienceModal({
 
         <ul className="mt-6 space-y-3 pl-5 text-sm leading-7 text-muted marker:text-ink">
           {item.details.map((detail) => (
-            <li key={detail} className="pl-1">
-              {detail}
-            </li>
+            <li key={detail} className="pl-1">{detail}</li>
           ))}
         </ul>
 
@@ -179,40 +231,56 @@ function ExperienceModal({
             </Link>
           </div>
         ) : null}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
-export function ExperienceList() {
+type ExperienceListProps = {
+  items?: Experience[];
+};
+
+export function ExperienceList({ items }: ExperienceListProps) {
   const [activeExperience, setActiveExperience] = useState<Experience | null>(null);
   const [activeTrigger, setActiveTrigger] = useState<HTMLButtonElement | null>(null);
+  const resolvedItems = items ?? portfolio.experience;
 
   return (
     <>
-      <div className="divide-y divide-line">
-        {portfolio.experience.map((item, index) => (
-          <FadeIn key={`${item.company}-${item.period}`} delay={index * 0.06}>
+      {/* Timeline container — vertical line runs through all items */}
+      <div className="relative">
+        <span
+          aria-hidden="true"
+          className="absolute left-[7px] top-5 bottom-0 w-px bg-line"
+        />
+        <div className="space-y-0">
+          {resolvedItems.map((item, index) => (
             <ExperienceItem
+              key={`${item.company}-${item.period}`}
               {...item}
+              index={index}
               onOpen={(trigger) => {
                 setActiveTrigger(trigger);
                 setActiveExperience(item);
               }}
             />
-          </FadeIn>
-        ))}
+          ))}
+        </div>
       </div>
-      {activeExperience ? (
-        <ExperienceModal
-          item={activeExperience}
-          returnFocusTo={activeTrigger}
-          onClose={() => {
-            setActiveExperience(null);
-            setActiveTrigger(null);
-          }}
-        />
-      ) : null}
+
+      <AnimatePresence>
+        {activeExperience ? (
+          <ExperienceModal
+            key={activeExperience.company}
+            item={activeExperience}
+            returnFocusTo={activeTrigger}
+            onClose={() => {
+              setActiveExperience(null);
+              setActiveTrigger(null);
+            }}
+          />
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }

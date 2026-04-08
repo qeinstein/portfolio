@@ -2,6 +2,7 @@
 title: Worker Pool
 excerpt: I built this bounded Go worker pool around explicit capacity, backpressure, and graceful shutdown.
 published: true
+featured: true
 tags: [concurrency, go, backpressure, infrastructure]
 stack: [Go, Goroutines, Channels, Docker]
 role: Systems engineer

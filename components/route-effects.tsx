@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useReducedMotion } from "framer-motion";
 
 export function RouteEffects() {
   const location = useLocation();
-  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (location.hash) {
@@ -13,7 +11,7 @@ export function RouteEffects() {
       if (target) {
         requestAnimationFrame(() => {
           target.scrollIntoView({
-            behavior: prefersReducedMotion ? "auto" : "smooth",
+            behavior: "auto",
             block: "start"
           });
         });
@@ -23,7 +21,7 @@ export function RouteEffects() {
     }
 
     window.scrollTo({ top: 0, behavior: "auto" });
-  }, [location.hash, location.pathname, prefersReducedMotion]);
+  }, [location.hash, location.pathname]);
 
   return null;
 }

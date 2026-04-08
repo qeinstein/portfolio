@@ -15,6 +15,7 @@ export type ProjectEntryMeta = {
   title: string;
   excerpt: string;
   published: boolean;
+  featured: boolean;
   tags: string[];
   stack: string[];
   role: string;

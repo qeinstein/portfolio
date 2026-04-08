@@ -1,18 +1,104 @@
-import { Children, isValidElement } from "react";
-import ReactMarkdown from "react-markdown";
+import { Children, type ReactNode, isValidElement, useEffect, useState } from "react";
+import ReactMarkdown, { defaultUrlTransform } from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
+import { slugifyHeading } from "@/lib/markdown-headings";
+
 type MarkdownContentProps = {
   content: string;
+  onOpenWorkspaceFile?: (fileId: string) => void;
 };
 
-export function MarkdownContent({ content }: MarkdownContentProps) {
+function toPlainText(node: unknown): string {
+  if (typeof node === "string" || typeof node === "number") {
+    return String(node);
+  }
+
+  if (!isValidElement(node)) {
+    return "";
+  }
+
+  const children = (node.props as { children?: unknown }).children;
+  return Children.toArray(children as ReactNode).map(toPlainText).join("");
+}
+
+function formatLanguageLabel(className?: string) {
+  const language = className
+    ?.split(" ")
+    .find((token) => token.startsWith("language-"))
+    ?.replace(/^language-/, "");
+
+  if (!language) {
+    return "code";
+  }
+
+  return language.replace(/[-_]/g, " ");
+}
+
+function CodeBlock({
+  className,
+  children,
+}: {
+  className?: string;
+  children: ReactNode;
+}) {
+  const [copied, setCopied] = useState(false);
+  const rawCode = Children.toArray(children).map(toPlainText).join("").replace(/\n$/, "");
+  const languageLabel = formatLanguageLabel(className);
+
+  useEffect(() => {
+    if (!copied) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => setCopied(false), 1600);
+    return () => window.clearTimeout(timer);
+  }, [copied]);
+
+  return (
+    <div className="code-block-shell">
+      <div className="code-block-toolbar">
+        <span className="code-block-language">{languageLabel}</span>
+        <button
+          type="button"
+          className="ui-ghost-control px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em]"
+          onClick={async () => {
+            try {
+              await navigator.clipboard?.writeText(rawCode);
+              setCopied(true);
+            } catch {
+              setCopied(false);
+            }
+          }}
+        >
+          {copied ? "Copied" : "Copy"}
+        </button>
+      </div>
+      <pre className="code-block-pre workspace-scroll">
+        <code className={className}>{children}</code>
+      </pre>
+    </div>
+  );
+}
+
+export function MarkdownContent({ content, onOpenWorkspaceFile }: MarkdownContentProps) {
+  const headingCounts = new Map<string, number>();
+  const getHeadingId = (headingText: string) => {
+    const base = slugifyHeading(headingText) || "section";
+    const count = headingCounts.get(base) ?? 0;
+    headingCounts.set(base, count + 1);
+    return count === 0 ? base : `${base}-${count + 1}`;
+  };
+
   return (
     <div className="markdown-shell">
       <ReactMarkdown
         rehypePlugins={[rehypeHighlight]}
         remarkPlugins={[remarkGfm]}
+        urlTransform={(url) =>
+          url.startsWith("workspace:") ? url : defaultUrlTransform(url)
+        }
         components={{
           p: ({ children }) => {
             const nodes = Children.toArray(children).filter(
@@ -48,28 +134,57 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
               </p>
             );
           },
-          h1: ({ children }) => (
-            <h1 className="text-3xl font-medium tracking-tight text-ink md:text-4xl">
-              {children}
-            </h1>
-          ),
-          h2: ({ children }) => (
-            <h2 className="pt-4 text-xl font-medium tracking-tight text-ink md:text-2xl">
-              {children}
-            </h2>
-          ),
-          h3: ({ children }) => (
-            <h3 className="pt-3 text-base font-medium tracking-tight text-ink md:text-lg">
-              {children}
-            </h3>
-          ),
+          h1: ({ children }) => {
+            const headingText = Children.toArray(children).map(toPlainText).join("");
+            return (
+              <h1
+                id={getHeadingId(headingText)}
+                className="scroll-mt-28 text-3xl font-medium tracking-tight text-ink md:text-4xl"
+              >
+                {children}
+              </h1>
+            );
+          },
+          h2: ({ children }) => {
+            const headingText = Children.toArray(children).map(toPlainText).join("");
+            return (
+              <h2
+                id={getHeadingId(headingText)}
+                className="scroll-mt-28 pt-4 text-xl font-medium tracking-tight text-ink md:text-2xl"
+              >
+                {children}
+              </h2>
+            );
+          },
+          h3: ({ children }) => {
+            const headingText = Children.toArray(children).map(toPlainText).join("");
+            return (
+              <h3
+                id={getHeadingId(headingText)}
+                className="scroll-mt-28 pt-3 text-base font-medium tracking-tight text-ink md:text-lg"
+              >
+                {children}
+              </h3>
+            );
+          },
+          h4: ({ children }) => {
+            const headingText = Children.toArray(children).map(toPlainText).join("");
+            return (
+              <h4
+                id={getHeadingId(headingText)}
+                className="scroll-mt-28 pt-2 text-sm font-medium tracking-tight text-ink md:text-base"
+              >
+                {children}
+              </h4>
+            );
+          },
           ul: ({ children }) => (
-            <ul className="space-y-2 pl-5 text-[15px] leading-7 text-ink/90 marker:text-ink md:text-base">
+            <ul className="list-disc space-y-2 pl-5 text-[15px] leading-7 text-ink/90 marker:text-ink md:text-base">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="space-y-2 pl-5 text-[15px] leading-7 text-ink/90 marker:text-ink md:text-base">
+            <ol className="list-decimal space-y-2 pl-5 text-[15px] leading-7 text-ink/90 marker:text-ink md:text-base">
               {children}
             </ol>
           ),
@@ -83,6 +198,17 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
             <a
               href={href}
               className="text-ink underline decoration-accent/60 underline-offset-4 transition-opacity duration-200 hover:opacity-75"
+              onClick={(event) => {
+                if (!href) {
+                  return;
+                }
+
+                if (href.startsWith("workspace:")) {
+                  event.preventDefault();
+                  onOpenWorkspaceFile?.(href.replace(/^workspace:/, ""));
+                  return;
+                }
+              }}
               target={href?.startsWith("http") ? "_blank" : undefined}
               rel={href?.startsWith("http") ? "noreferrer" : undefined}
             >
@@ -91,21 +217,13 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
           ),
           code: ({ className, children }) =>
             className ? (
-              <code
-                className={`${className} block min-w-full rounded-none bg-transparent px-4 py-3 text-[13px] leading-6 md:text-sm`}
-              >
-                {children}
-              </code>
+              <CodeBlock className={className}>{children}</CodeBlock>
             ) : (
-              <code className="rounded-md bg-surface/90 px-1.5 py-0.5 text-[0.92em] text-ink">
+              <code className="rounded-md border border-line bg-surface/78 px-1.5 py-0.5 text-[0.92em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
                 {children}
               </code>
             ),
-          pre: ({ children }) => (
-            <pre className="overflow-x-auto rounded-2xl border border-line bg-surface/90">
-              {children}
-            </pre>
-          ),
+          pre: ({ children }) => <>{children}</>,
           img: ({ src, alt, title }) => (
             <figure className="markdown-image-frame">
               <img

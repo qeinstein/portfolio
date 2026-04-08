@@ -5,12 +5,13 @@ export type Experience = {
   summary: string;
   details: string[];
   blogSlug?: string;
+  featured?: boolean;
 };
 
 export const portfolio = {
   meta: {
-    name: "Toheeb Goodluck Ogunade",
-    titles: "AI/ML Engineer | Backend & Distributed Systems Engineer",
+    name: "Toheeb Ogunade",
+    titles: "Software Engineer · Quantum Computing · AI Researcher",
     email: "ogunadetoheeb4@gmail.com",
     linkedin: "https://www.linkedin.com/in/toheeb-ogunade-442051287/",
     github: "https://github.com/qeinstein",
@@ -20,10 +21,8 @@ export const portfolio = {
     education: "BSc Computer Science, University of Lagos (Expected Jan 2028)"
   },
   hero: {
-    headline:
-      "Hi, I'm Toheeb. I build high-performance backend systems and autonomous AI architectures.",
-    subheadline:
-      "Contributor @lima. Currently exploring distributed systems, recursive AI agents, and deterministic system deployments."
+    headline: "Toheeb Ogunade",
+    subheadline: "I build high-concurrency backend systems, AI pipelines, and research-driven software. Currently: deterministic reasoning infrastructure for autonomous agents."
   },
   about:
     "I am a Software and AI Engineer building the infrastructure of today to enable the breakthroughs of tomorrow. With a deep foundation in Go, Python, and CSP-based high-concurrency systems, I architect scalable backends that bridge the gap between engineering and AI research. My ultimate goal is to innovate at the intersection of AI/ML and quantum computing, pushing the boundaries of how we process and understand information.",
@@ -40,7 +39,8 @@ export const portfolio = {
         "Built the current foundation with a versioned API, Badger-backed persistence, hybrid snapshot and journal recovery, and console-facing contracts for a usable product surface.",
         "Using the project as the base for a broader product vision: durable reasoning for autonomous software, high-trust agent workflows, and explainable state transitions."
       ],
-      blogSlug: "velarix"
+      blogSlug: "velarix",
+      featured: true
     },
     {
       company: "Oyster Skin",
@@ -52,7 +52,8 @@ export const portfolio = {
         "Architected and deployed live production RESTful APIs and machine learning models for recommendation engines using Python and FastAPI.",
         "Optimized data pipelines and PostgreSQL relational schemas, reducing processing latency and model retraining cycles by 30%.",
         "Maintained high-availability cloud deployments via automated CI/CD workflows and Docker."
-      ]
+      ],
+      featured: true
     },
     {
       company: "NITDA ICT Hub",

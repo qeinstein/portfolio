@@ -33,6 +33,7 @@
       "title": "Delta",
       "excerpt": "I built Delta as an autonomous local agent system around planning, persistent memory, sandboxed execution, and self-extension.",
       "published": true,
+      "featured": true,
       "tags": [
         "agents",
         "autonomy",
@@ -56,6 +57,7 @@
       "title": "Intelligent Proxy",
       "excerpt": "I built this Python proxy server to combine request filtering, dynamic blocklists, caching, tunneling, and lightweight traffic controls.",
       "published": true,
+      "featured": false,
       "tags": [
         "networking",
         "security",
@@ -79,6 +81,7 @@
       "title": "MCP Server",
       "excerpt": "I built this Model Context Protocol server to expose tools, resources, and prompts for structured code exploration.",
       "published": true,
+      "featured": true,
       "tags": [
         "mcp",
         "tooling",
@@ -102,6 +105,7 @@
       "title": "Worker Pool",
       "excerpt": "I built this bounded Go worker pool around explicit capacity, backpressure, and graceful shutdown.",
       "published": true,
+      "featured": true,
       "tags": [
         "concurrency",
         "go",

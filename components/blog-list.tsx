@@ -5,7 +5,6 @@ import {
   formatContentDate,
   type BlogEntryMeta
 } from "@/lib/content";
-import { portfolio } from "@/lib/portfolio-data";
 
 import { FadeIn } from "./fade-in";
 
@@ -19,7 +18,7 @@ function BlogItem({
   return (
     <Link
       to={`/blog/${slug}`}
-      className="grid gap-2 py-5 transition-colors duration-200 hover:text-ink md:grid-cols-[160px_minmax(0,1fr)]"
+      className="-mx-4 grid gap-2 rounded-lg px-4 py-5 transition-colors duration-200 hover:bg-surface/40 hover:text-ink md:grid-cols-[160px_minmax(0,1fr)]"
     >
       <p className="text-sm text-muted">{formatContentDate(date)}</p>
       <div className="space-y-1">
@@ -37,17 +36,12 @@ function BlogItem({
 
 export function BlogList() {
   return (
-    <div className="space-y-2">
-      <p className="max-w-2xl text-sm leading-7 text-muted">
-        {portfolio.blogIntro}
-      </p>
-      <div className="divide-y divide-line pt-3">
+    <div className="divide-y divide-line">
         {blogPosts.map((post, index) => (
           <FadeIn key={post.slug} delay={index * 0.05}>
             <BlogItem {...post} />
           </FadeIn>
         ))}
-      </div>
     </div>
   );
 }

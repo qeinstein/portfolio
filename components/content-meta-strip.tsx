@@ -15,16 +15,13 @@ export function ContentMetaStrip({ items }: ContentMetaStripProps) {
   }
 
   return (
-    <dl className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+    <dl className="divide-y divide-line border-y border-line">
       {items.map((item) => (
-        <div
-          key={item.label}
-          className="rounded-2xl border border-line bg-surface/55 px-4 py-4"
-        >
+        <div key={item.label} className="grid gap-2 py-4 sm:grid-cols-[140px_minmax(0,1fr)] sm:gap-6">
           <dt className="text-[11px] uppercase tracking-[0.22em] text-muted">
             {item.label}
           </dt>
-          <dd className="mt-2 text-sm leading-7 text-ink">{item.value}</dd>
+          <dd className="text-sm leading-7 text-ink">{item.value}</dd>
         </div>
       ))}
     </dl>

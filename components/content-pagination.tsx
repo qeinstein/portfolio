@@ -27,14 +27,19 @@ export function ContentPagination({
       {previous ? (
         <Link
           to={previous.href}
-          className="rounded-2xl border border-line px-5 py-4 transition-colors duration-200 hover:bg-surface"
+          className="group flex items-start justify-between gap-6 py-3 transition-colors duration-200 hover:text-ink"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-muted">
-            {previous.label}
-          </p>
-          <p className="mt-2 text-base font-medium tracking-tight text-ink">
-            {previous.title}
-          </p>
+          <div className="min-w-0">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-muted">
+              {previous.label}
+            </p>
+            <p className="mt-2 text-base font-medium tracking-tight text-ink transition-colors duration-200 group-hover:text-accent">
+              {previous.title}
+            </p>
+          </div>
+          <span className="shrink-0 text-sm text-muted transition-colors duration-200 group-hover:text-ink">
+            View
+          </span>
         </Link>
       ) : (
         <div className="hidden md:block" />
@@ -42,14 +47,19 @@ export function ContentPagination({
       {next ? (
         <Link
           to={next.href}
-          className="rounded-2xl border border-line px-5 py-4 transition-colors duration-200 hover:bg-surface md:text-right"
+          className="group flex items-start justify-between gap-6 py-3 transition-colors duration-200 hover:text-ink md:flex-row-reverse md:text-right"
         >
-          <p className="text-[11px] uppercase tracking-[0.22em] text-muted">
-            {next.label}
-          </p>
-          <p className="mt-2 text-base font-medium tracking-tight text-ink">
-            {next.title}
-          </p>
+          <div className="min-w-0">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-muted">
+              {next.label}
+            </p>
+            <p className="mt-2 text-base font-medium tracking-tight text-ink transition-colors duration-200 group-hover:text-accent">
+              {next.title}
+            </p>
+          </div>
+          <span className="shrink-0 text-sm text-muted transition-colors duration-200 group-hover:text-ink">
+            View
+          </span>
         </Link>
       ) : (
         <div className="hidden md:block" />

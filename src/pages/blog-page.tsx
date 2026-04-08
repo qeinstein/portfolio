@@ -11,9 +11,9 @@ export function BlogPage() {
   });
 
   return (
-    <section className="mx-auto max-w-3xl py-16 md:py-24">
+    <section className="mx-auto max-w-5xl py-16 md:py-24">
       <div className="space-y-6">
-        <p className="text-xs uppercase tracking-[0.24em] text-muted">Blog</p>
+        <p className="text-sm text-muted">I write Interesting things, Enjoy your read.</p>
         <h1 className="text-4xl font-medium tracking-tight text-ink md:text-5xl">
           Thoughts on distributed systems, AI architectures, and open-source.
         </h1>
@@ -30,7 +30,7 @@ export function BlogPage() {
           .
         </p>
       </div>
-      <div className="mt-14 border-t border-line pt-8">
+      <div className="mt-12">
         <BlogList />
       </div>
     </section>

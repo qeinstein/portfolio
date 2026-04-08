@@ -58,6 +58,7 @@ export function parseMarkdownFile(raw, type, relativePath) {
     title: normalizeString(data.title, slug),
     excerpt: normalizeString(data.excerpt),
     published: normalizeBoolean(data.published),
+    featured: normalizeBoolean(data.featured, false),
     tags: normalizeStringArray(data.tags),
     stack: normalizeStringArray(data.stack),
     role: normalizeString(data.role),

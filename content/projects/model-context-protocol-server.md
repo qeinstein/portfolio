@@ -2,6 +2,7 @@
 title: MCP Server
 excerpt: I built this Model Context Protocol server to expose tools, resources, and prompts for structured code exploration.
 published: true
+featured: true
 tags: [mcp, tooling, protocols, typescript]
 stack: [TypeScript, Node.js, MCP, HTTP]
 role: Protocol and tooling engineer
