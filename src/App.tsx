@@ -28,7 +28,7 @@ export function App() {
       const stored = localStorage.getItem("theme") as ThemeName | null;
       if (stored) return stored;
     }
-    return "vscode-light";
+    return "one-dark-pro-night-flat";
   });
 
   const location = useLocation();
