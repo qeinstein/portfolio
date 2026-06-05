@@ -3,27 +3,39 @@ import { FadeIn } from "./fade-in";
 
 export function PublicationsList() {
   return (
-    <div className="space-y-8">
-      {portfolio.publications.map((pub, index) => (
-        <FadeIn key={pub.title} delay={index * 0.08}>
-          <article className="group relative rounded-lg border border-line bg-surface/10 p-5 transition-all duration-200 hover:bg-surface/30 hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-start justify-between gap-2">
-                <h3 className="font-secondary text-lg font-medium leading-tight text-ink transition-colors duration-200 group-hover:text-accent">
+    <div className="space-y-12">
+      {portfolio.publications.map((pub, index) => {
+        const isQuantum = pub.title.toLowerCase().includes("quantum");
+
+        return (
+          <FadeIn key={pub.title} delay={index * 0.08}>
+            <article className="grid gap-6 md:grid-cols-[180px_1fr] md:gap-8 border-b border-line/40 pb-10 last:border-0 last:pb-0">
+              {/* Left Column: Metadata & Links */}
+              <div className="space-y-2.5">
+                <div className="flex flex-wrap gap-2 md:flex-col md:items-start">
+                  <span className="inline-flex rounded-full font-mono text-[9px] font-semibold uppercase tracking-wider text-accent bg-accent/8 border border-accent/20 px-2.5 py-0.5">
+                    {pub.journal.replace("Published on ", "")}
+                  </span>
+                  <span className="font-mono text-[10px] text-muted mt-0.5 md:mt-0">
+                    {pub.date}
+                  </span>
+                </div>
+                
+                <div className="pt-2 flex flex-row gap-3 md:flex-col md:gap-1.5">
                   <a
                     href={pub.link}
+                    className="inline-flex items-center gap-1 text-[11px] font-medium text-accent hover:underline"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1"
                   >
-                    {pub.title}
+                    Read Publication
                     <svg
                       aria-hidden="true"
                       viewBox="0 0 24 24"
-                      className="h-3.5 w-3.5 opacity-60 transition-all duration-200 group-hover:opacity-100 group-hover:text-accent"
+                      className="h-3 w-3"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
@@ -31,53 +43,101 @@ export function PublicationsList() {
                       <path d="M10 7h7v7" />
                     </svg>
                   </a>
-                </h3>
-                <span className="shrink-0 rounded-full border border-line bg-surface/50 px-2.5 py-0.5 font-mono text-[11px] text-muted">
-                  {pub.date}
-                </span>
-              </div>
-              <p className="text-xs font-mono text-muted">
-                {pub.authors} &middot; <span className="italic">{pub.journal}</span>
-              </p>
-              <p className="text-sm leading-6 text-muted">{pub.summary}</p>
-              
-              <div className="space-y-1.5 border-t border-line/40 pt-3">
-                <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-ink">
-                  Empirical Diagnostics &amp; Findings:
-                </p>
-                <ul className="space-y-1 pl-1 text-xs leading-relaxed text-muted">
-                  {pub.findings.map((finding, idx) => (
-                    <li key={idx} className="relative pl-3.5 before:absolute before:left-0 before:top-2 before:h-1 before:w-1 before:rounded-full before:bg-accent">
-                      {finding}
-                    </li>
-                  ))}
-                </ul>
+                  {pub.codeLink && (
+                    <a
+                      href={pub.codeLink}
+                      className="text-[11px] text-muted hover:text-ink transition-colors duration-200"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Code Repository &rarr;
+                    </a>
+                  )}
+                </div>
               </div>
 
-              <div className="flex gap-4 pt-1 text-xs">
-                <a
-                  href={pub.link}
-                  className="text-accent transition-colors duration-200 hover:text-accent/80"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Read Paper &rarr;
-                </a>
-                {pub.codeLink && (
-                  <a
-                    href={pub.codeLink}
-                    className="text-muted transition-colors duration-200 hover:text-ink"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Code Repository
-                  </a>
-                )}
+              {/* Right Column: Content and Metrics */}
+              <div className="space-y-4">
+                <div className="space-y-1.5">
+                  <h3 className="font-secondary text-lg font-medium leading-snug text-ink transition-colors duration-200 hover:text-accent">
+                    <a href={pub.link} target="_blank" rel="noreferrer">
+                      {pub.title}
+                    </a>
+                  </h3>
+                  
+                  {/* Author list with Toheeb's name highlighted */}
+                  <p className="text-xs text-muted font-secondary">
+                    {pub.authors.split(", ").map((author, idx, arr) => {
+                      const isToheeb = author.includes("Toheeb");
+                      return (
+                        <span key={author}>
+                          <span className={isToheeb ? "font-semibold text-ink" : "text-muted"}>
+                            {author}
+                          </span>
+                          {idx < arr.length - 1 ? ", " : ""}
+                        </span>
+                      );
+                    })}
+                  </p>
+                </div>
+
+                <p className="text-sm leading-relaxed text-muted">
+                  {pub.summary}
+                </p>
+
+                {/* Key Empirical Results Metric Grid */}
+                <div className="rounded border border-line bg-surface/5 py-4 px-5 space-y-3">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink font-semibold block">
+                    Empirical Metrics &amp; Benchmarks
+                  </span>
+                  
+                  {isQuantum ? (
+                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-3 text-xs pt-1">
+                      <div className="space-y-0.5 border-l border-accent/30 pl-3">
+                        <span className="text-muted block text-[9px] uppercase tracking-wider font-mono">Trials &amp; Grid</span>
+                        <span className="font-mono font-medium text-ink">10 datasets, 110+ runs</span>
+                      </div>
+                      <div className="space-y-0.5 border-l border-accent/30 pl-3">
+                        <span className="text-muted block text-[9px] uppercase tracking-wider font-mono">Rank Collapse</span>
+                        <span className="font-mono font-medium text-ink">erank ↓ 1.04, κ ↑ 5.7×10⁹</span>
+                      </div>
+                      <div className="space-y-0.5 border-l border-accent/30 pl-3">
+                        <span className="text-muted block text-[9px] uppercase tracking-wider font-mono">CKA Equivalence</span>
+                        <span className="font-mono font-medium text-ink">CKA ≥ 0.95 (7/10 datasets)</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-3 text-xs pt-1">
+                      <div className="space-y-0.5 border-l border-accent/30 pl-3">
+                        <span className="text-muted block text-[9px] uppercase tracking-wider font-mono">Semantic Noise</span>
+                        <span className="font-mono font-medium text-ink">82.5% accuracy (1k words)</span>
+                      </div>
+                      <div className="space-y-0.5 border-l border-accent/30 pl-3">
+                        <span className="text-muted block text-[9px] uppercase tracking-wider font-mono">Random Context</span>
+                        <span className="font-mono font-medium text-ink">97.5% accuracy (4k words)</span>
+                      </div>
+                      <div className="space-y-0.5 border-l border-accent/30 pl-3">
+                        <span className="text-muted block text-[9px] uppercase tracking-wider font-mono">Failure Mode</span>
+                        <span className="font-mono font-medium text-ink">24% distractor adoption</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Detailed list of findings */}
+                  <ul className="text-xs text-muted space-y-2 pt-3 border-t border-line/30">
+                    {pub.findings.map((finding, idx) => (
+                      <li key={idx} className="relative pl-4 before:absolute before:left-0 before:top-2 before:h-1 before:w-1 before:rounded-full before:bg-accent/80 leading-relaxed">
+                        {finding}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-          </article>
-        </FadeIn>
-      ))}
+            </article>
+          </FadeIn>
+        );
+      })}
     </div>
   );
 }
+export default PublicationsList;

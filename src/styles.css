@@ -35,9 +35,12 @@
   body {
     margin: 0;
     min-height: 100vh;
-    background:
-      radial-gradient(circle at top, rgb(var(--accent) / 0.12), transparent 30%),
-      rgb(var(--canvas));
+    background-color: rgb(var(--canvas));
+    background-image: 
+      radial-gradient(circle at top, rgb(var(--accent) / 0.08), transparent 45%),
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 100% 100%, 30px 30px, 30px 30px;
     color: rgb(var(--ink));
     line-height: 1.5;
     text-rendering: optimizeLegibility;
@@ -86,28 +89,29 @@
 
 :root {
   color-scheme: dark;
-  --canvas: 22 25 29;
-  --ink: 171 178 191;
-  --muted: 127 132 142;
-  --accent: 97 175 239;
-  --surface: 35 39 46;
-  --line: rgba(62, 68, 82, 0.82);
-  --code-bg: rgb(22 25 29);
-  --code-muted: #7f848e;
-  --code-keyword: #c678dd;
-  --code-string: #98c379;
-  --code-number: #d19a66;
-  --code-title: #61afef;
-  --code-comment: #5c6370;
+  --canvas: 8 9 11;
+  --ink: 226 232 240;
+  --muted: 148 163 184;
+  --accent: 99 102 241;
+  --surface: 15 17 22;
+  --line: rgba(255, 255, 255, 0.08);
+  --grid-color: rgba(255, 255, 255, 0.015);
+  --code-bg: rgb(15 17 22);
+  --code-muted: #64748b;
+  --code-keyword: #818cf8;
+  --code-string: #34d399;
+  --code-number: #fb923c;
+  --code-title: #60a5fa;
+  --code-comment: #475569;
 
-  --vscode-bg: #16191d;
-  --vscode-panel: #16191d;
-  --vscode-sidebar: #16191d;
-  --vscode-tab: #16191d;
-  --vscode-tab-active: #23272e;
-  --vscode-border: #37393d;
-  --vscode-status: #16191d;
-  --vscode-status-text: #abb2bf;
+  --vscode-bg: #08090b;
+  --vscode-panel: #0f1115;
+  --vscode-sidebar: #0f1115;
+  --vscode-tab: #0f1115;
+  --vscode-tab-active: #15171c;
+  --vscode-border: rgba(255, 255, 255, 0.08);
+  --vscode-status: #08090b;
+  --vscode-status-text: #94a3b8;
   --radius-sm: 0.75rem;
   --radius-md: 1rem;
   --radius-lg: 1.25rem;
@@ -132,53 +136,55 @@ html {
 
 html[data-theme="one-dark-pro-night-flat"] {
   color-scheme: dark;
-  --canvas: 22 25 29;
-  --ink: 171 178 191;
-  --muted: 127 132 142;
-  --accent: 97 175 239;
-  --surface: 35 39 46;
-  --line: rgba(62, 68, 82, 0.82);
-  --code-bg: rgb(22 25 29);
-  --code-muted: #7f848e;
-  --code-keyword: #c678dd;
-  --code-string: #98c379;
-  --code-number: #d19a66;
-  --code-title: #61afef;
-  --code-comment: #5c6370;
+  --canvas: 8 9 11;
+  --ink: 226 232 240;
+  --muted: 148 163 184;
+  --accent: 99 102 241;
+  --surface: 15 17 22;
+  --line: rgba(255, 255, 255, 0.08);
+  --grid-color: rgba(255, 255, 255, 0.015);
+  --code-bg: rgb(15 17 22);
+  --code-muted: #64748b;
+  --code-keyword: #818cf8;
+  --code-string: #34d399;
+  --code-number: #fb923c;
+  --code-title: #60a5fa;
+  --code-comment: #475569;
 
-  --vscode-bg: #16191d;
-  --vscode-panel: #16191d;
-  --vscode-sidebar: #16191d;
-  --vscode-tab: #16191d;
-  --vscode-tab-active: #23272e;
-  --vscode-border: #37393d;
-  --vscode-status: #16191d;
-  --vscode-status-text: #abb2bf;
+  --vscode-bg: #08090b;
+  --vscode-panel: #0f1115;
+  --vscode-sidebar: #0f1115;
+  --vscode-tab: #0f1115;
+  --vscode-tab-active: #15171c;
+  --vscode-border: rgba(255, 255, 255, 0.08);
+  --vscode-status: #08090b;
+  --vscode-status-text: #94a3b8;
 }
 
 html[data-theme="vscode-light"] {
   color-scheme: light;
   --canvas: 255 255 255;
-  --ink: 30 30 30;
-  --muted: 95 99 104;
-  --accent: 0 122 204;
-  --surface: 245 245 245;
-  --line: rgba(0, 0, 0, 0.08);
-  --code-bg: rgb(245 245 245);
-  --code-muted: #6a737d;
-  --code-keyword: #0000ff;
-  --code-string: #a31515;
-  --code-number: #098658;
-  --code-title: #111111;
-  --code-comment: #008000;
+  --ink: 15 23 42;
+  --muted: 71 85 105;
+  --accent: 79 70 229;
+  --surface: 248 250 252;
+  --line: rgba(15, 23, 42, 0.08);
+  --grid-color: rgba(15, 23, 42, 0.02);
+  --code-bg: rgb(248 250 252);
+  --code-muted: #64748b;
+  --code-keyword: #4f46e5;
+  --code-string: #059669;
+  --code-number: #d97706;
+  --code-title: #0f172a;
+  --code-comment: #475569;
 
   --vscode-bg: #ffffff;
-  --vscode-panel: #f3f3f3;
-  --vscode-sidebar: #f3f3f3;
-  --vscode-tab: #ececec;
+  --vscode-panel: #f8fafc;
+  --vscode-sidebar: #f8fafc;
+  --vscode-tab: #f1f5f9;
   --vscode-tab-active: #ffffff;
-  --vscode-border: rgba(0, 0, 0, 0.12);
-  --vscode-status: #007acc;
+  --vscode-border: rgba(15, 23, 42, 0.08);
+  --vscode-status: #4f46e5;
   --vscode-status-text: #ffffff;
 }
 

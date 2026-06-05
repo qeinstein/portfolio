@@ -111,7 +111,7 @@ export const portfolio = {
       authors: "Toheeb Goodluck Ogunade",
       journal: "Published on Medium",
       date: "Mar 2026",
-      link: "https://medium.com/@ogunadetoheeb4",
+      link: "https://medium.com/@ogunadetoheeb4/context-collapse-why-semantic-interference-breaks-llms-before-token-limits-do-ce48a23b29d2",
       codeLink: "https://github.com/qeinstein/context_collapse",
       summary: "Ran 560 controlled trials across arithmetic, retrieval, logic, and instruction-following tasks to examine how random background context versus semantically related noise impacts LLM precision.",
       findings: [

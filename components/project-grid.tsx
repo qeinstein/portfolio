@@ -73,11 +73,11 @@ function ProjectCard({
           </Link>
         </div>
 
-        <div className="flex flex-wrap gap-2 md:justify-end">
+        <div className="flex flex-wrap gap-1.5 md:justify-end">
           {stack.map((item) => (
             <span
               key={`${slug}-${item}`}
-              className="inline-flex items-center rounded-full border border-line bg-surface/35 px-3 py-1 font-mono text-[11px] font-medium leading-5 tracking-tight text-muted"
+              className="inline-flex h-6 items-center justify-center rounded border border-line bg-surface/35 px-2.5 font-mono text-[10px] text-muted select-none"
             >
               {item}
             </span>
