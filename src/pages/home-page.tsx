@@ -4,6 +4,8 @@ import { HeroComponent } from "@/components/hero-component";
 import { ProjectGrid } from "@/components/project-grid";
 import { SectionShell } from "@/components/section-shell";
 import { SkillTags } from "@/components/skill-tags";
+import { PublicationsList } from "@/components/publications-list";
+import { AwardsList } from "@/components/awards-list";
 import { projectEntries } from "@/lib/content";
 import { portfolio } from "@/lib/portfolio-data";
 import { usePageMetadata } from "@/lib/seo";
@@ -11,41 +13,39 @@ import { Link } from "react-router-dom";
 
 export function HomePage() {
   usePageMetadata({
-    title: `${portfolio.meta.name} | Backend, Distributed Systems, and AI`,
+    title: `${portfolio.meta.name} | AI & Systems Engineer`,
     description: portfolio.hero.subheadline,
     pathname: "/"
   });
 
   const featuredExperiences = portfolio.experience.filter((item) => item.featured);
-  const experiencePreview = (featuredExperiences.length > 0
+  const experiencePreview = featuredExperiences.length > 0
     ? featuredExperiences
-    : portfolio.experience
-  ).slice(0, 2);
+    : portfolio.experience;
 
   const featuredProjects = projectEntries.filter((item) => item.featured);
-  const projectsPreview = (featuredProjects.length > 0
+  const projectsPreview = featuredProjects.length > 0
     ? featuredProjects
-    : projectEntries
-  ).slice(0, 3);
+    : projectEntries;
 
   return (
     <>
       <HeroComponent />
-      <SectionShell
-        id="experience"
-        title="Experience"
-        layout="stacked"
-        action={
-          <Link
-            to="/experience"
-            className="text-sm text-muted transition duration-200 hover:text-ink hover:drop-shadow-[0_0_12px_rgba(79,70,229,0.45)]"
-          >
-            View all &rarr;
-          </Link>
-        }
-      >
-        <ExperienceList items={experiencePreview} />
+      
+      <SectionShell id="about" title="About" layout="stacked">
+        <p className="text-[15px] leading-8 text-muted md:text-base max-w-4xl">
+          {portfolio.about}
+        </p>
       </SectionShell>
+
+      <SectionShell
+        id="research"
+        title="Research"
+        layout="stacked"
+      >
+        <PublicationsList />
+      </SectionShell>
+
       <SectionShell
         id="projects"
         title="Projects"
@@ -53,7 +53,7 @@ export function HomePage() {
         action={
           <Link
             to="/projects"
-            className="text-sm text-muted transition duration-200 hover:text-ink hover:drop-shadow-[0_0_12px_rgba(79,70,229,0.45)]"
+            className="text-xs font-semibold uppercase tracking-wider text-muted transition duration-200 hover:text-ink hover:drop-shadow-[0_0_12px_rgba(var(--accent)/0.45)]"
           >
             View all &rarr;
           </Link>
@@ -61,9 +61,31 @@ export function HomePage() {
       >
         <ProjectGrid items={projectsPreview} />
       </SectionShell>
+
+      <SectionShell
+        id="experience"
+        title="Experience"
+        layout="stacked"
+        action={
+          <Link
+            to="/experience"
+            className="text-xs font-semibold uppercase tracking-wider text-muted transition duration-200 hover:text-ink hover:drop-shadow-[0_0_12px_rgba(var(--accent)/0.45)]"
+          >
+            View all &rarr;
+          </Link>
+        }
+      >
+        <ExperienceList items={experiencePreview} />
+      </SectionShell>
+
+      <SectionShell id="awards" title="Awards" layout="stacked">
+        <AwardsList />
+      </SectionShell>
+
       <SectionShell id="skills" title="Skills" layout="stacked">
         <SkillTags />
       </SectionShell>
+
       <SectionShell
         id="blog-preview"
         title="Blog"
@@ -71,7 +93,7 @@ export function HomePage() {
         action={
           <Link
             to="/blog"
-            className="text-sm text-muted transition duration-200 hover:text-ink hover:drop-shadow-[0_0_12px_rgba(79,70,229,0.45)]"
+            className="text-xs font-semibold uppercase tracking-wider text-muted transition duration-200 hover:text-ink hover:drop-shadow-[0_0_12px_rgba(var(--accent)/0.45)]"
           >
             All posts &rarr;
           </Link>
@@ -82,3 +104,4 @@ export function HomePage() {
     </>
   );
 }
+export default HomePage;

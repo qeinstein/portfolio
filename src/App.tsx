@@ -1,7 +1,18 @@
 import { useEffect, useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import { RouteEffects } from "@/components/route-effects";
-import { VSCodeWorkspace } from "@/components/vscode-workspace";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+
+import { HomePage } from "@/src/pages/home-page";
+import { WhoIAmPage } from "@/src/pages/who-i-am-page";
+import { ProjectsPage } from "@/src/pages/projects-page";
+import { ProjectPage } from "@/src/pages/project-page";
+import { BlogPage } from "@/src/pages/blog-page";
+import { BlogPostPage } from "@/src/pages/blog-post-page";
+import { ExperiencePage } from "@/src/pages/experience-page";
+import { NotFoundPage } from "@/src/pages/not-found-page";
 
 export type ThemeName =
   | "one-dark-pro-night-flat"
@@ -11,28 +22,6 @@ export type ThemeName =
   | "nord"
   | "monokai";
 
-const themeColors: Record<ThemeName, string> = {
-  "one-dark-pro-night-flat": "#16191d",
-  "vscode-dark": "#1e1e1e",
-  "vscode-light": "#ffffff",
-  "github-dark": "#0d1117",
-  "nord": "#2e3440",
-  "monokai": "#272822",
-};
-
-const ALL_THEMES: ThemeName[] = [
-  "one-dark-pro-night-flat",
-  "vscode-dark",
-  "vscode-light",
-  "github-dark",
-  "nord",
-  "monokai",
-];
-
-function pickRandomTheme(): ThemeName {
-  return ALL_THEMES[Math.floor(Math.random() * ALL_THEMES.length)];
-}
-
 export function App() {
   const [theme, setTheme] = useState<ThemeName>(() => {
     if (typeof document === "undefined") {
@@ -40,28 +29,50 @@ export function App() {
     }
 
     const stored = localStorage.getItem("theme") as ThemeName | null;
-    if (stored && (ALL_THEMES as string[]).includes(stored)) {
-      return stored;
-    }
-
-    return pickRandomTheme();
+    return stored === "vscode-light" ? "vscode-light" : "one-dark-pro-night-flat";
   });
+
+  const location = useLocation();
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
-    document
-      .querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", themeColors[theme]);
+    const themeColor = theme === "vscode-light" ? "#ffffff" : "#16191d";
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themeColor);
   }, [theme]);
 
+  // Scroll to top on route navigation
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  const toggleTheme = () => {
+    setTheme((prev) =>
+      prev === "vscode-light" ? "one-dark-pro-night-flat" : "vscode-light"
+    );
+  };
+
+  // Maps theme back to a simple binary string for headers and toggles
+  const mappedTheme = theme === "vscode-light" ? "light" : "dark";
+
   return (
-    <div className="bg-canvas font-sans text-ink antialiased">
+    <div className="min-h-screen bg-canvas font-sans text-ink antialiased flex flex-col transition-colors duration-200">
       <RouteEffects />
-      <VSCodeWorkspace
-        theme={theme}
-        onThemeChange={setTheme}
-      />
+      <SiteHeader theme={mappedTheme} onToggleTheme={toggleTheme} />
+      <main className="flex-1 w-full max-w-5xl mx-auto px-6 md:px-8 py-6">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/who-i-am" element={<WhoIAmPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<ProjectPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+      <SiteFooter />
     </div>
   );
 }
+export default App;

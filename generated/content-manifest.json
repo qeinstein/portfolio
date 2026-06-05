@@ -29,9 +29,33 @@
   ],
   "projectEntries": [
     {
+      "slug": "causaldb",
+      "title": "CausalDB",
+      "excerpt": "A high-performance reactive backend state engine engineered in Go using the Communicating Sequential Processes (CSP) concurrency model and a DAG-backed Truth Maintenance System.",
+      "published": true,
+      "featured": true,
+      "tags": [
+        "concurrency",
+        "databases",
+        "systems",
+        "go"
+      ],
+      "stack": [
+        "Go",
+        "CSP",
+        "Docker",
+        "Git"
+      ],
+      "role": "Creator",
+      "status": "Shipped",
+      "link": "",
+      "repo": "https://github.com/qeinstein/causaldb",
+      "sourcePath": "/content/projects/causaldb.md"
+    },
+    {
       "slug": "delta-autonomous-recursive-intelligence-system",
       "title": "Delta",
-      "excerpt": "I built Delta as an autonomous local agent system around planning, persistent memory, sandboxed execution, and self-extension.",
+      "excerpt": "A local-first autonomous agent platform built with a friend — combining recursive planning, persistent memory, sandboxed execution, and an optional control plane for team deployments.",
       "published": true,
       "featured": true,
       "tags": [
@@ -44,9 +68,11 @@
         "Python",
         "Gemini",
         "SQLite",
-        "RestrictedPython"
+        "Docker",
+        "FastAPI",
+        "PostgreSQL"
       ],
-      "role": "AI systems engineer",
+      "role": "Co-engineer",
       "status": "Active build",
       "link": "",
       "repo": "https://github.com/JohnOjure/Delta",
@@ -99,6 +125,81 @@
       "link": "",
       "repo": "https://github.com/777genius/claude-code-source-code/tree/main/mcp-server",
       "sourcePath": "/content/projects/model-context-protocol-server.md"
+    },
+    {
+      "slug": "rate-limiter",
+      "title": "Rate Limiter Service",
+      "excerpt": "A production-grade FastAPI service implementing token-bucket rate limiting with deterministic middleware, latency tracking, and thread-safe metrics collection.",
+      "published": true,
+      "featured": false,
+      "tags": [
+        "backend",
+        "rate-limiting",
+        "fastapi",
+        "security"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Docker",
+        "Pytest"
+      ],
+      "role": "Creator",
+      "status": "Shipped",
+      "link": "",
+      "repo": "https://github.com/qeinstein/rate_limiter",
+      "sourcePath": "/content/projects/rate-limiter.md"
+    },
+    {
+      "slug": "turboquant",
+      "title": "TurboQuant",
+      "excerpt": "An implementation and extension of TurboQuant (arXiv:2504.19874)—a two-stage LLM KV cache compression pipeline combining Lloyd-Max scalar quantization with 1-bit QJL inner product correction.",
+      "published": true,
+      "featured": true,
+      "tags": [
+        "llm-opt",
+        "quantization",
+        "py-torch",
+        "math"
+      ],
+      "stack": [
+        "Python",
+        "PyTorch",
+        "GPT-2",
+        "WikiText-2"
+      ],
+      "role": "Lead Researcher & Engineer",
+      "status": "Completed Research",
+      "link": "https://arxiv.org/abs/2504.19874",
+      "repo": "https://github.com/qeinstein/TurboQuant",
+      "sourcePath": "/content/projects/turboquant.md"
+    },
+    {
+      "slug": "velarix",
+      "title": "Velarix",
+      "excerpt": "A decision-integrity and symbolic mechanistic interpretability engine for AI agents that eliminates logical hallucinations by offloading stateful reasoning to a deterministic Go kernel.",
+      "published": true,
+      "featured": true,
+      "tags": [
+        "ai-safety",
+        "mechanistic-interpretability",
+        "agents",
+        "go"
+      ],
+      "stack": [
+        "Go",
+        "Python",
+        "TypeScript",
+        "SQLite",
+        "PostgreSQL",
+        "spaCy",
+        "GLiNER"
+      ],
+      "role": "Creator & Lead Architect",
+      "status": "Shipped",
+      "link": "",
+      "repo": "https://github.com/qeinstein/velarix",
+      "sourcePath": "/content/projects/velarix.md"
     },
     {
       "slug": "bounded-worker-pool",

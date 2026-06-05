@@ -8,10 +8,21 @@ export type Experience = {
   featured?: boolean;
 };
 
+export type Publication = {
+  title: string;
+  authors: string;
+  journal: string;
+  date: string;
+  link: string;
+  codeLink?: string;
+  summary: string;
+  findings: string[];
+};
+
 export const portfolio = {
   meta: {
-    name: "Toheeb Ogunade",
-    titles: "Software Engineer · Quantum Computing · AI Researcher",
+    name: "Toheeb Goodluck Ogunade",
+    titles: "Software Engineer · AI Researcher · Quantum Computing",
     email: "ogunadetoheeb4@gmail.com",
     linkedin: "https://www.linkedin.com/in/toheeb-ogunade-442051287/",
     github: "https://github.com/qeinstein",
@@ -21,109 +32,143 @@ export const portfolio = {
     education: "BSc Computer Science, University of Lagos (Expected Jan 2028)"
   },
   hero: {
-    headline: "Toheeb Ogunade",
-    subheadline: "I build high-concurrency backend systems, AI pipelines, and research-driven software. Currently: deterministic reasoning infrastructure for autonomous agents."
+    headline: "Toheeb Goodluck Ogunade",
+    subheadline: "I bridge the gap between high-concurrency systems engineering, recursive AI architectures, and quantum computing. Currently developing deterministic reasoning infrastructure for autonomous agents."
   },
   about:
-    "I am a Software and AI Engineer building the infrastructure of today to enable the breakthroughs of tomorrow. With a deep foundation in Go, Python, and CSP-based high-concurrency systems, I architect scalable backends that bridge the gap between engineering and AI research. My ultimate goal is to innovate at the intersection of AI/ML and quantum computing, pushing the boundaries of how we process and understand information.",
+    "I am a Software Engineer and AI Researcher. I focus on building reliable systems with clear boundaries, visible failure modes, and solid operational ergonomics. My work spans from writing G-M-P scheduler-optimized state engines in Go and deploying 4.7× KV cache quantization pipelines in PyTorch, to benchmarking quantum-inspired feature maps. I prefer designs that make tradeoffs explicit—valuing capacity, backpressure, and deterministic reasoning over designs that mask complexity.",
   experience: [
     {
-      company: "Velarix",
-      role: "Founder",
-      period: "2025 - Present",
+      company: "OysterSkin",
+      role: "AI/ML & Backend Integration Engineer (Contract)",
+      period: "Jul 2025 – Jan 2026",
       summary:
-        "Building deterministic reasoning infrastructure for autonomous agents, with state, provenance, and safe invalidation designed into the core.",
+        "Engineered live recommendation models and backend infrastructure, restructuring database performance and feature extraction loops.",
       details: [
-        "Shaping Velarix as a startup around a Go-based epistemic kernel that models facts, justification sets, and causal invalidation instead of treating agent memory like a flat cache.",
-        "Designed the platform around tenant isolation, actor attribution, auditability, and controlled write paths so the system can serve production workflows rather than demo-only agent loops.",
-        "Built the current foundation with a versioned API, Badger-backed persistence, hybrid snapshot and journal recovery, and console-facing contracts for a usable product surface.",
-        "Using the project as the base for a broader product vision: durable reasoning for autonomous software, high-trust agent workflows, and explainable state transitions."
-      ],
-      blogSlug: "velarix",
-      featured: true
-    },
-    {
-      company: "Oyster Skin",
-      role: "AI/ML & Backend Integration Engineer",
-      period: "July 2025 - Jan 2026",
-      summary:
-        "Worked across production APIs, recommendation systems, and deployment workflows for live backend and ML features.",
-      details: [
-        "Architected and deployed live production RESTful APIs and machine learning models for recommendation engines using Python and FastAPI.",
-        "Optimized data pipelines and PostgreSQL relational schemas, reducing processing latency and model retraining cycles by 30%.",
-        "Maintained high-availability cloud deployments via automated CI/CD workflows and Docker."
+        "Engineered and deployed production ML models for personalized recommendation, reducing model retraining cycle times by 30% through automated feature extraction pipeline design.",
+        "Built low-latency inference infrastructure integrating ML models into high-availability web services via Python and FastAPI.",
+        "Conducted A/B testing and statistical model evaluation to optimize predictive accuracy and drive user retention metrics.",
+        "Optimized data pipelines and PostgreSQL relational schemas, reducing processing latency and query execution times."
       ],
       featured: true
     },
     {
       company: "NITDA ICT Hub",
-      role: "Software & Backend Engineer",
-      period: "Jan 2025 - Aug 2025",
+      role: "Full-Stack & Backend Engineer",
+      period: "May 2025 – Dec 2025",
       summary:
-        "Built internal backend systems and containerized services with an emphasis on maintainable infrastructure and database performance.",
+        "Designed and shipped production-ready internal tools, microservices containerization pipelines, and transactional database schemas.",
       details: [
-        "Containerized distributed RESTful microservices using Docker, reducing integration overhead by 25%.",
-        "Designed and optimized scalable PostgreSQL architectures for high-volume read/write operations.",
-        "Architected production-ready internal tools utilizing React and Node.js/Express."
-      ]
+        "Built and shipped production-ready internal tooling using React and Node.js/Express across fast-paced sprint cycles, owning features end-to-end.",
+        "Containerized RESTful microservices using Docker, reducing integration overhead by 25% and enforcing deployment determinism across CI/CD pipelines.",
+        "Designed normalized PostgreSQL schemas supporting high-throughput read/write operations across distributed application layers."
+      ],
+      featured: true
     },
     {
       company: "Curacel",
       role: "AI & API Engineering Intern",
-      period: "Apr 2025 - May 2025",
+      period: "Apr 2025 – May 2025",
       summary:
-        "Contributed to ML-assisted claims and fraud workflows, focusing on service performance and data-heavy API paths.",
+        "Contributed to machine learning pipelines for claims auditing and refactored high-throughput API integrations.",
       details: [
-        "Engineered ML modules for automated claims processing and high-precision fraud detection.",
-        "Optimized microservices architecture to handle high-volume health data streams, significantly reducing API latency."
-      ]
+        "Engineered ML modules for automated health insurance claims processing and high-precision fraud detection.",
+        "Won Best AI Innovation at the Curacel Hackathon (2024) for a multilingual healthcare AI assistant with NLP-driven anomaly detection.",
+        "Collaborated with senior engineers to diagnose and refactor microservice architectures, measurably improving API response times for high-volume, real-time health data streams."
+      ],
+      featured: true
     },
     {
       company: "Codetech IT",
       role: "Machine Learning Intern",
-      period: "Jul 2024 - Dec 2024",
+      period: "Jul 2024 – Dec 2024",
       summary:
-        "Worked on applied ML integrations for client systems, improving inference reliability and decision automation.",
+        "Integrated AI APIs into business workflows and optimized supervised model performance.",
       details: [
         "Integrated AI-driven APIs into client architectures to automate data-driven decisions.",
         "Fine-tuned supervised learning models to improve inference reliability."
-      ]
+      ],
+      featured: false
     }
   ] satisfies Experience[],
+  publications: [
+    {
+      title: "A Matched Spectral Benchmark of Quantum Inspired Feature Maps",
+      authors: "Toheeb Goodluck Ogunade, Taofeek Kassim, Etinosa Osaro",
+      journal: "arXiv:2605.24324",
+      date: "May 2026",
+      link: "https://arxiv.org/abs/2605.24324",
+      codeLink: "https://github.com/qeinstein",
+      summary: "Designed and executed a 10-dataset, 110+-run empirical benchmark comparing amplitude, angle, and basis Quantum Information Encoding (QIE) techniques against 5 matched classical baselines under controlled parameters using PyTorch and TensorFlow.",
+      findings: [
+        "Ran 30 paired statistical comparisons (t-test + Wilcoxon + Cohen’s d): 27/30 significantly worse, 0 wins.",
+        "Attributed QIE failures via spectral diagnostics: amplitude rank collapse (erank ↓ 1.04, κ ↑ 5.7 × 10^9), angle geometric equivalence to linear feature spaces (CKA ≥ 0.95 on 7/10 datasets), and basis Hamming geometry mismatch.",
+        "Confirmed a falsifiable boundary condition: when condition number κ ≈ 2 and effective rank is high, amplitude encoding achieves near-parity with the best classical baseline (d = −0.03, p = 0.96)."
+      ]
+    },
+    {
+      title: "Context Collapse in LLMs: Semantic Interference vs. Context Length",
+      authors: "Toheeb Goodluck Ogunade",
+      journal: "Published on Medium",
+      date: "Mar 2026",
+      link: "https://medium.com/@ogunadetoheeb4",
+      codeLink: "https://github.com/qeinstein/context_collapse",
+      summary: "Ran 560 controlled trials across arithmetic, retrieval, logic, and instruction-following tasks to examine how random background context versus semantically related noise impacts LLM precision.",
+      findings: [
+        "Random context up to ~4,000 words reduced LLM accuracy by only 1.3% (98.8% → 97.5%), whereas just 1,000 words of semantically interfering noise drove accuracy down to 82.5%.",
+        "Identified 'distractor adoption' as the primary mechanism of failure: 24% of retrieval errors under semantic noise were values sourced directly from irrelevant context.",
+        "Showed that 100% instruction compliance was maintained throughout, isolating answer selection—not instruction dilution—as the failure mode."
+      ]
+    }
+  ] satisfies Publication[],
   skills: {
     Languages: [
       "Go (Golang)",
       "Python",
       "TypeScript",
       "SQL (PostgreSQL)",
-      "PHP",
-      "JavaScript"
+      "JavaScript",
+      "HTML/CSS"
     ],
-    "AI/ML": [
+    "AI/ML & Coref": [
       "PyTorch",
       "TensorFlow",
       "Scikit-Learn",
-      "NLP",
-      "Computer Vision",
-      "Autonomous Agents"
+      "NLP Pipelines",
+      "GLiNER",
+      "coreferee & spaCy",
+      "LLM Evaluation",
+      "RAG Systems"
     ],
-    "Backend & Frameworks": [
+    "Backend & Concurrency": [
       "FastAPI",
       "Go Fiber",
       "Node.js/Express",
       "React",
-      "Laravel"
+      "CSP Concurrency Model",
+      "G-M-P Scheduler Optimization"
     ],
-    Infrastructure: [
+    "Infrastructure & Systems": [
       "Docker",
-      "Git",
-      "Linux",
-      "CI/CD",
-      "RESTful APIs",
-      "JSON-RPC",
-      "Webhooks"
+      "Git / GitHub Workflows",
+      "Linux Systems",
+      "RunPod GPU Cloud",
+      "CI/CD Pipelines",
+      "JSON-RPC 2.0 & Webhooks"
     ]
   },
-  blogIntro:
-    "My Thoughts."
+  awards: [
+    {
+      title: "Winner, Best AI Innovation",
+      issuer: "Curacel Hackathon",
+      year: "2024",
+      description: "Awarded for designing and building a multilingual healthcare AI assistant featuring real-time NLP-driven anomaly detection."
+    },
+    {
+      title: "8th Place Overall",
+      issuer: "National Mathematics Olympiad",
+      year: "2023",
+      description: "Ranked 8th nationally in a rigorous multi-stage mathematics competition testing advanced problem-solving, number theory, and analysis."
+    }
+  ]
 } as const;
