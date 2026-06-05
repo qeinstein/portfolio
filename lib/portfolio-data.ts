@@ -33,10 +33,10 @@ export const portfolio = {
   },
   hero: {
     headline: "Toheeb Goodluck Ogunade",
-    subheadline: "I bridge the gap between high-concurrency systems engineering, recursive AI architectures, and quantum computing. Currently developing deterministic reasoning infrastructure for autonomous agents."
+    subheadline: "Hi, I'm Toheeb. I'm a software engineer and researcher building at the intersection of scalable backend systems, AI agents, and quantum computing."
   },
   about:
-    "I am a Software Engineer and AI Researcher. I focus on building reliable systems with clear boundaries, visible failure modes, and solid operational ergonomics. My work spans from writing G-M-P scheduler-optimized state engines in Go and deploying 4.7× KV cache quantization pipelines in PyTorch, to benchmarking quantum-inspired feature maps. I prefer designs that make tradeoffs explicit—valuing capacity, backpressure, and deterministic reasoning over designs that mask complexity.",
+    "I focus on building reliable software with clear boundaries, predictable failure modes, and good operational ergonomics. I'd rather build designs that make tradeoffs explicit—valuing capacity, backpressure, and deterministic execution—over abstractions that pretend complexity doesn't exist. I'm also exploring quantum computing mechanics alongside AI safety, and I like writing detailed reports on what I learn.",
   experience: [
     {
       company: "OysterSkin",

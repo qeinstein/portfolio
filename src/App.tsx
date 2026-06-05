@@ -24,12 +24,11 @@ export type ThemeName =
 
 export function App() {
   const [theme, setTheme] = useState<ThemeName>(() => {
-    if (typeof document === "undefined") {
-      return "one-dark-pro-night-flat";
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("theme") as ThemeName | null;
+      if (stored) return stored;
     }
-
-    const stored = localStorage.getItem("theme") as ThemeName | null;
-    return stored === "vscode-light" ? "vscode-light" : "one-dark-pro-night-flat";
+    return "vscode-light";
   });
 
   const location = useLocation();
@@ -37,7 +36,7 @@ export function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
-    const themeColor = theme === "vscode-light" ? "#ffffff" : "#16191d";
+    const themeColor = theme === "vscode-light" ? "#f9fafb" : "#18181b";
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themeColor);
   }, [theme]);
 
