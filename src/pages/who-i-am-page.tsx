@@ -27,7 +27,7 @@ export function WhoIAmPage() {
           Who I Am
         </h1>
         <p className="text-base text-muted max-w-2xl leading-relaxed">
-          A software engineer and AI researcher operating at the convergence of distributed systems, machine learning compression, and quantum feature mapping.
+          A software engineer and AI researcher operating at the convergence of distributed systems, machine learning compression, and quantum computing.
         </p>
       </header>
 
@@ -41,7 +41,7 @@ export function WhoIAmPage() {
               I’m Toheeb — a backend and AI engineer focused on building reliable systems with clear boundaries, visible failure modes, and good operational ergonomics. I build things with the understanding that software is meant to run under constraints, fail deterministically, and remain understandable under load.
             </p>
             <p className="text-sm leading-7 text-muted">
-              Rather than chasing hype cycles, I spend my time exploring how deep mathematical models (such as quantum encodings) translate into practical computation, and how to optimize key pipelines (like LLM memory caching) to make advanced AI run effectively.
+              Rather than chasing hype cycles, I spend my time exploring how deep mathematical models (such as quantum computing) translate into practical computation, and how to optimize key pipelines (like LLM memory caching) to make advanced AI run effectively.
             </p>
           </section>
 
@@ -70,7 +70,7 @@ export function WhoIAmPage() {
           <section className="space-y-4">
             <h2 className="font-secondary text-xl font-medium text-ink">Outside Work</h2>
             <p className="text-sm leading-7 text-muted">
-              I’m exploring quantum computing alongside AI safety and mechanistic interpretability. I enjoy writing detailed reports on my findings, conducting empirical benchmarks (like matched spectral analysis of feature maps), and contributing to open-source systems.
+              I’m exploring quantum computing alongside AI research. I enjoy writing detailed reports on my findings, conducting empirical benchmarks (like matched spectral analysis of feature maps), and contributing to open-source systems.
             </p>
           </section>
         </div>
@@ -88,12 +88,12 @@ export function WhoIAmPage() {
                 <p className="text-[11px] leading-relaxed text-muted">Go G-M-P scheduler mechanics, channels, thread-safety, and database replication patterns.</p>
               </li>
               <li className="space-y-1">
-                <h4 className="text-xs font-medium text-ink">Empirical AI Safety</h4>
-                <p className="text-[11px] leading-relaxed text-muted">Mechanistic interpretability, verification, hallucination containment, and KV cache optimizations.</p>
+                <h4 className="text-xs font-medium text-ink">AI Research</h4>
+                <p className="text-[11px] leading-relaxed text-muted">LLM evaluation, agent architectures, and KV cache optimization.</p>
               </li>
               <li className="space-y-1">
-                <h4 className="text-xs font-medium text-ink">Quantum Encodings</h4>
-                <p className="text-[11px] leading-relaxed text-muted">Evaluating feature space geometries (amplitude, basis, angle encodings) under classical baselines.</p>
+                <h4 className="text-xs font-medium text-ink">Quantum Computing</h4>
+                <p className="text-[11px] leading-relaxed text-muted">Exploring how quantum algorithms and feature maps apply to machine learning.</p>
               </li>
             </ul>
           </div>
