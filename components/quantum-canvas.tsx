@@ -2,6 +2,30 @@ import { useEffect, useRef } from "react";
 
 export function QuantumCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // The mesh colour is a theme token, not a constant: indigo at dark-mode alpha
+  // is nearly invisible on paper, so light mode supplies a deeper, denser value.
+  const meshRef = useRef({ rgb: "99, 102, 241", alpha: 0.32 });
+
+  useEffect(() => {
+    const readMeshTokens = () => {
+      const styles = getComputedStyle(document.documentElement);
+      const rgb = styles.getPropertyValue("--mesh-rgb").trim();
+      const alpha = Number.parseFloat(styles.getPropertyValue("--mesh-alpha"));
+      meshRef.current = {
+        rgb: rgb ? rgb.replace(/\s+/g, ", ") : "99, 102, 241",
+        alpha: Number.isFinite(alpha) ? alpha : 0.32
+      };
+    };
+
+    readMeshTokens();
+    const observer = new MutationObserver(readMeshTokens);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"]
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -123,7 +147,8 @@ export function QuantumCanvas() {
           
           // Fade lines towards the edges
           const edgeFade = Math.max(0, 1.0 - d);
-          ctx.strokeStyle = `rgba(99, 102, 241, ${edgeFade * 0.32})`;
+          const mesh = meshRef.current;
+          ctx.strokeStyle = `rgba(${mesh.rgb}, ${edgeFade * mesh.alpha})`;
 
           // Draw U line segment
           if (i < gridSize) {
@@ -162,7 +187,10 @@ export function QuantumCanvas() {
         style={{ display: "block" }}
       />
       {/* Premium wave identifier caption */}
-      <div className="absolute bottom-1 left-0 right-0 text-center font-mono text-[8px] text-muted/35 tracking-[0.25em] uppercase">
+      <div
+        className="absolute bottom-1 left-0 right-0 text-center font-mono text-[8px] text-muted tracking-[0.25em] uppercase"
+        style={{ opacity: "var(--caption-opacity)" }}
+      >
         Wave Function Manifold &middot; &Psi;(r, t)
       </div>
     </div>

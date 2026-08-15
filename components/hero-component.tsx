@@ -19,7 +19,7 @@ export function HeroComponent() {
         };
 
   return (
-    <section className="border-b border-line py-10 md:py-16">
+    <section className="border-b border-line py-5 md:py-8">
       <div className="grid gap-10 items-center md:grid-cols-[1fr_auto] md:gap-14">
         <div className="space-y-6">
           <div className="space-y-4">
@@ -48,7 +48,7 @@ export function HeroComponent() {
           <motion.div className="flex flex-wrap gap-4 pt-2" {...item(0.28)}>
             <a
               href={portfolio.meta.githubDirect}
-              className="inline-flex items-center gap-2 bg-accent px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-200 hover:opacity-90 hover:shadow-[0_4px_12px_rgba(99,102,241,0.25)]"
+              className="inline-flex items-center gap-2 bg-accent px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-200 hover:opacity-90 hover:shadow-[var(--cta-shadow)]"
               target="_blank"
               rel="noreferrer"
             >
@@ -67,25 +67,6 @@ export function HeroComponent() {
                 <path d="M10 7h7v7" />
               </svg>
             </a>
-            <Link
-              to="/who-i-am"
-              className="inline-flex items-center gap-2 border border-line bg-surface/40 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-ink transition-colors duration-200 hover:bg-surface"
-            >
-              Who I am
-              <svg 
-                aria-hidden="true" 
-                viewBox="0 0 24 24" 
-                className="h-3.5 w-3.5 text-muted" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2.2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="M12 5l7 7-7 7" />
-              </svg>
-            </Link>
             <Link
               to="/blog"
               className="inline-flex items-center gap-1.5 px-1 py-2.5 text-xs font-semibold uppercase tracking-wider text-muted transition-colors duration-200 hover:text-ink"
@@ -108,13 +89,58 @@ export function HeroComponent() {
           </motion.div>
         </div>
         
-        <motion.div 
+        <motion.div
           className="flex justify-center shrink-0"
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <QuantumCanvas />
+          {/* Portrait emerging from the wave-manifold field */}
+          <div className="group relative aspect-[4/5] w-[280px] sm:w-[320px] md:w-[360px]">
+            {/* Ambient accent bloom behind the subject */}
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-4 bottom-0 top-10 rounded-[50%] opacity-60 blur-3xl"
+              style={{ backgroundColor: "var(--portrait-bloom)" }}
+              animate={reduced ? undefined : { opacity: [0.45, 0.85, 0.45] }}
+              transition={
+                reduced
+                  ? undefined
+                  : { duration: 9, repeat: Infinity, ease: "easeInOut" }
+              }
+            />
+
+            <div className="absolute inset-0 flex items-center justify-center">
+              <QuantumCanvas />
+            </div>
+
+            {/* Slow drift keeps the portrait alive without pulling focus */}
+            <motion.div
+              className="pointer-events-none absolute inset-0 z-10"
+              animate={reduced ? undefined : { y: [0, -7, 0] }}
+              transition={
+                reduced
+                  ? undefined
+                  : { duration: 11, repeat: Infinity, ease: "easeInOut" }
+              }
+            >
+              <img
+                src="/toheeb-ogunade.jpg"
+                alt={portfolio.meta.name}
+                width={1152}
+                height={1536}
+                loading="eager"
+                decoding="async"
+                className="absolute inset-x-0 bottom-0 h-[88%] w-full object-cover object-bottom"
+                style={{
+                  maskImage:
+                    "linear-gradient(to top, rgb(0 0 0) 82%, rgb(0 0 0 / 0) 100%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to top, rgb(0 0 0) 82%, rgb(0 0 0 / 0) 100%)"
+                }}
+              />
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

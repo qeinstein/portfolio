@@ -14,7 +14,6 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { id: "experience", label: "Experience", sectionId: "experience" },
-  { id: "who-i-am", label: "Who I Am", sectionId: "who-i-am", route: "/who-i-am" },
   { id: "projects", label: "Projects", sectionId: "projects" },
   { id: "skills", label: "Skills", sectionId: "skills" },
   { id: "blog", label: "Blog", sectionId: "blog-preview", route: "/blog" }
@@ -36,10 +35,6 @@ function getRouteActiveId(pathname: string) {
 
   if (pathname.startsWith("/experience")) {
     return "experience";
-  }
-
-  if (pathname.startsWith("/who-i-am")) {
-    return "who-i-am";
   }
 
   return "experience";

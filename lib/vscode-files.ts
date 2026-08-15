@@ -1,8 +1,6 @@
 import { blogPosts, getBlogPostBySlug, getProjectEntryBySlug, projectEntries } from "@/lib/content";
 import { portfolio } from "@/lib/portfolio-data";
 
-import whoIAmRaw from "@/who-i-am.md?raw";
-
 export type ExplorerNode =
   | {
       type: "folder";
@@ -83,7 +81,6 @@ function welcomeMarkdown() {
     "",
     "Take a look at my portfolio:",
     "",
-    "- [who-i-am.md](workspace:about/who-i-am.md)",
     "- [experience.md](workspace:about/experience.md)",
     "- [contact.md](workspace:about/contact.md)",
     "- [projects](workspace:projects/index.md)",
@@ -104,12 +101,6 @@ export function getExplorerTree(): ExplorerNode[] {
           id: "file-welcome",
           name: "welcome.md",
           fileId: "welcome.md",
-        },
-        {
-          type: "file",
-          id: "file-who-i-am",
-          name: "who-i-am.md",
-          fileId: "about/who-i-am.md",
         },
         {
           type: "file",
@@ -173,10 +164,6 @@ export function getPathnameForFileId(fileId: string) {
     return "/";
   }
 
-  if (fileId === "about/who-i-am.md") {
-    return "/who-i-am";
-  }
-
   if (fileId === "about/experience.md") {
     return "/experiences";
   }
@@ -211,10 +198,6 @@ export function getFileIdFromPathname(pathname: string) {
 
   if (normalized === "/") {
     return "welcome.md";
-  }
-
-  if (normalized === "/who-i-am") {
-    return "about/who-i-am.md";
   }
 
   if (normalized === "/experience" || normalized === "/experiences") {
@@ -257,15 +240,6 @@ export function getFileDescriptor(fileId: string): FileDescriptor | undefined {
       title: "welcome.md",
       language: "markdown",
       load: async () => welcomeMarkdown(),
-    };
-  }
-
-  if (fileId === "about/who-i-am.md") {
-    return {
-      fileId,
-      title: "who-i-am.md",
-      language: "markdown",
-      load: async () => stripFrontmatter(whoIAmRaw),
     };
   }
 

@@ -47,35 +47,35 @@ export function HomePage() {
       </SectionShell>
 
       <SectionShell
-        id="projects"
-        title="Projects"
-        layout="stacked"
-        action={
-          <Link
-            to="/projects"
-            className="text-xs font-semibold uppercase tracking-wider text-muted transition duration-200 hover:text-ink hover:drop-shadow-[0_0_12px_rgba(var(--accent)/0.45)]"
-          >
-            View all &rarr;
-          </Link>
-        }
-      >
-        <ProjectGrid items={projectsPreview} />
-      </SectionShell>
-
-      <SectionShell
         id="experience"
         title="Experience"
         layout="stacked"
         action={
           <Link
             to="/experience"
-            className="text-xs font-semibold uppercase tracking-wider text-muted transition duration-200 hover:text-ink hover:drop-shadow-[0_0_12px_rgba(var(--accent)/0.45)]"
+            className="glow-hover text-xs font-semibold uppercase tracking-wider text-muted transition duration-200 hover:text-ink"
           >
             View all &rarr;
           </Link>
         }
       >
         <ExperienceList items={experiencePreview} />
+      </SectionShell>
+
+      <SectionShell
+        id="projects"
+        title="Projects"
+        layout="stacked"
+        action={
+          <Link
+            to="/projects"
+            className="glow-hover text-xs font-semibold uppercase tracking-wider text-muted transition duration-200 hover:text-ink"
+          >
+            View all &rarr;
+          </Link>
+        }
+      >
+        <ProjectGrid items={projectsPreview} />
       </SectionShell>
 
       <SectionShell id="awards" title="Awards" layout="stacked">
@@ -93,7 +93,7 @@ export function HomePage() {
         action={
           <Link
             to="/blog"
-            className="text-xs font-semibold uppercase tracking-wider text-muted transition duration-200 hover:text-ink hover:drop-shadow-[0_0_12px_rgba(var(--accent)/0.45)]"
+            className="glow-hover text-xs font-semibold uppercase tracking-wider text-muted transition duration-200 hover:text-ink"
           >
             All posts &rarr;
           </Link>

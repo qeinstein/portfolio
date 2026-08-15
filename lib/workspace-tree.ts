@@ -58,7 +58,6 @@ export function getWorkspaceTree(): WorkspaceNode[] {
     name: "about",
     defaultOpen: true,
     children: [
-      { type: "file", id: "file-who-i-am", name: "who-i-am.md", to: "/who-i-am" },
       { type: "file", id: "file-experience", name: "experience.md", to: "/experience" },
     ],
   };

@@ -31,12 +31,26 @@ function ExperienceItem({
       <span
         className={`absolute left-0 top-[18px] flex h-4 w-4 items-center justify-center rounded-full border-2 transition-colors duration-300 ${
           featured
-            ? "border-accent bg-accent/15 shadow-[0_0_10px_rgb(var(--accent)/0.3)]"
+            ? "border-accent bg-accent/15 shadow-[var(--dot-glow)]"
             : "border-line bg-canvas"
         }`}
       >
         {featured && (
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          <>
+            {/* Soft halo marks the live roles */}
+            <motion.span
+              aria-hidden="true"
+              className="absolute inset-0 rounded-full bg-accent/25"
+              animate={{ scale: [1, 1.9, 1], opacity: [0.5, 0, 0.5] }}
+              transition={{
+                duration: 3.2,
+                repeat: Infinity,
+                ease: "easeOut",
+                delay: index * 0.4
+              }}
+            />
+            <span className="relative h-1.5 w-1.5 rounded-full bg-accent" />
+          </>
         )}
       </span>
 

@@ -36,8 +36,8 @@
     margin: 0;
     min-height: 100vh;
     background-color: rgb(var(--canvas));
-    background-image: 
-      radial-gradient(circle at top, rgb(var(--accent) / 0.08), transparent 45%),
+    background-image:
+      radial-gradient(circle at top, var(--body-glow), transparent 45%),
       linear-gradient(var(--grid-color) 1px, transparent 1px),
       linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
     background-size: 100% 100%, 30px 30px, 30px 30px;
@@ -89,6 +89,21 @@
 
 :root {
   color-scheme: dark;
+  --body-glow: rgb(var(--accent) / 0.08);
+  --panel-sheen: rgb(255 255 255 / 0.03);
+  --hover-wash: rgb(255 255 255 / 0.05);
+  --mesh-rgb: 99 102 241;
+  --mesh-alpha: 0.32;
+  --selection-alpha: 0.24;
+  --caption-opacity: 0.35;
+  --scrim: rgb(0 0 0 / 0.55);
+  --cta-shadow: 0 4px 12px rgb(var(--accent) / 0.25);
+  --dot-glow: 0 0 10px rgb(var(--accent) / 0.3);
+  --label-glow: drop-shadow(0 0 12px rgb(var(--accent) / 0.45));
+  --portrait-bloom: rgb(var(--accent) / 0.1);
+  --vignette-rgb: 0 0 0;
+  --vignette-alpha: 0.55;
+  --danger: 248 113 113;
   --canvas: 8 9 11;
   --ink: 226 232 240;
   --muted: 148 163 184;
@@ -136,6 +151,21 @@ html {
 
 html[data-theme="one-dark-pro-night-flat"] {
   color-scheme: dark;
+  --body-glow: rgb(var(--accent) / 0.08);
+  --panel-sheen: rgb(255 255 255 / 0.03);
+  --hover-wash: rgb(255 255 255 / 0.05);
+  --mesh-rgb: 99 102 241;
+  --mesh-alpha: 0.32;
+  --selection-alpha: 0.24;
+  --caption-opacity: 0.35;
+  --scrim: rgb(0 0 0 / 0.55);
+  --cta-shadow: 0 4px 12px rgb(var(--accent) / 0.25);
+  --dot-glow: 0 0 10px rgb(var(--accent) / 0.3);
+  --label-glow: drop-shadow(0 0 12px rgb(var(--accent) / 0.45));
+  --portrait-bloom: rgb(var(--accent) / 0.1);
+  --vignette-rgb: 0 0 0;
+  --vignette-alpha: 0.55;
+  --danger: 248 113 113;
   --canvas: 8 9 11;
   --ink: 226 232 240;
   --muted: 148 163 184;
@@ -163,27 +193,64 @@ html[data-theme="one-dark-pro-night-flat"] {
 
 html[data-theme="vscode-light"] {
   color-scheme: light;
-  --canvas: 255 255 255;
-  --ink: 15 23 42;
-  --muted: 71 85 105;
+
+  /* Paper, not glare: a cool near-white page with pure-white raised surfaces,
+     so cards read as lifted instead of as darker holes (the dark theme's
+     surface-above-canvas relationship, rebuilt rather than inverted). */
+  --canvas: 250 251 253;
+  --surface: 255 255 255;
+  --ink: 17 24 39;
+  --muted: 82 95 115;
   --accent: 79 70 229;
-  --surface: 248 250 252;
-  --line: rgba(15, 23, 42, 0.08);
-  --grid-color: rgba(15, 23, 42, 0.02);
+
+  /* Borders need more weight on white than white-on-dark hairlines do. */
+  --line: rgba(15, 23, 42, 0.11);
+  --grid-color: rgba(15, 23, 42, 0.028);
+
+  /* Indigo wash is halved on white — the same value that reads as depth on
+     near-black turns muddy lavender on paper. */
+  --body-glow: rgb(var(--accent) / 0.045);
+  --panel-sheen: rgb(var(--accent) / 0.035);
+  --hover-wash: rgb(15 23 42 / 0.045);
+  --selection-alpha: 0.18;
+  --caption-opacity: 0.62;
+
+  /* Glows are an additive, dark-background idiom. On paper they read as smudges,
+     so light mode trades each one for crisp elevation or a hard ring. */
+  --scrim: rgb(15 23 42 / 0.28);
+  --cta-shadow: 0 3px 10px rgb(var(--accent) / 0.22);
+  --dot-glow: 0 0 0 3px rgb(var(--accent) / 0.13);
+  --label-glow: none;
+  --portrait-bloom: rgb(var(--accent) / 0.05);
+  --vignette-rgb: 15 23 42;
+  --vignette-alpha: 0.1;
+  --danger: 220 38 38;
+
+  /* The mesh must go darker and denser to survive a white backdrop. */
+  --mesh-rgb: 67 56 202;
+  --mesh-alpha: 0.5;
+
+  /* Cool, tight, low-opacity shadows: black at dark-mode strength reads as
+     dirt on white. */
+  --shadow-soft: 0 12px 32px rgb(15 23 42 / 0.07);
+  --shadow-panel:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 10px 28px rgb(15 23 42 / 0.06);
+
   --code-bg: rgb(248 250 252);
-  --code-muted: #64748b;
-  --code-keyword: #4f46e5;
-  --code-string: #059669;
-  --code-number: #d97706;
-  --code-title: #0f172a;
-  --code-comment: #475569;
+  --code-muted: #475569;
+  --code-keyword: #6d28d9;
+  --code-string: #047857;
+  --code-number: #b45309;
+  --code-title: #1e293b;
+  --code-comment: #64748b;
 
   --vscode-bg: #ffffff;
   --vscode-panel: #f8fafc;
   --vscode-sidebar: #f8fafc;
   --vscode-tab: #f1f5f9;
   --vscode-tab-active: #ffffff;
-  --vscode-border: rgba(15, 23, 42, 0.08);
+  --vscode-border: rgba(15, 23, 42, 0.11);
   --vscode-status: #4f46e5;
   --vscode-status-text: #ffffff;
 }
@@ -273,7 +340,7 @@ html[data-theme="vscode-dark"] {
 }
 
 ::selection {
-  background: rgb(var(--accent) / 0.24);
+  background: rgb(var(--accent) / var(--selection-alpha));
 }
 
 :focus-visible {
@@ -314,7 +381,7 @@ a {
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     background:
-      linear-gradient(180deg, rgb(255 255 255 / 0.03), transparent 45%),
+      linear-gradient(180deg, var(--panel-sheen), transparent 45%),
       rgb(var(--surface) / 0.74);
     box-shadow: var(--shadow-panel);
     backdrop-filter: blur(14px);
@@ -363,8 +430,16 @@ a {
   }
 
   .ui-ghost-control:hover {
-    background: rgb(255 255 255 / 0.05);
+    background: var(--hover-wash);
     color: rgb(var(--ink));
+  }
+
+.glow-hover {
+    transition: filter 200ms ease;
+  }
+
+  .glow-hover:hover {
+    filter: var(--label-glow);
   }
 
   .workspace-scroll {
@@ -398,9 +473,9 @@ a {
   }
 
   .state-panel-icon[data-tone="error"] {
-    border-color: rgb(248 113 113 / 0.25);
-    background: rgb(248 113 113 / 0.12);
-    color: rgb(248 113 113);
+    border-color: rgb(var(--danger) / 0.25);
+    background: rgb(var(--danger) / 0.12);
+    color: rgb(var(--danger));
   }
 
   .state-panel-title {
@@ -545,7 +620,7 @@ a {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.025), transparent 32%),
+    linear-gradient(180deg, var(--panel-sheen), transparent 32%),
     var(--code-bg);
   box-shadow: var(--shadow-panel);
 }
@@ -558,7 +633,7 @@ a {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--line);
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.05), transparent),
+    linear-gradient(180deg, var(--panel-sheen), transparent),
     rgb(var(--surface) / 0.18);
 }
 

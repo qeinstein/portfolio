@@ -219,7 +219,7 @@ export function MarkdownContent({ content, onOpenWorkspaceFile }: MarkdownConten
             className ? (
               <CodeBlock className={className}>{children}</CodeBlock>
             ) : (
-              <code className="break-words rounded-md border border-line bg-surface/78 px-1.5 py-0.5 text-[0.92em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+              <code className="break-words rounded-md border border-line bg-surface/78 px-1.5 py-0.5 text-[0.92em] text-ink shadow-[inset_0_1px_0_var(--panel-sheen)]">
                 {children}
               </code>
             ),

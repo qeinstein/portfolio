@@ -497,8 +497,8 @@ function ExplorerNodeRow({
         }}
         className={`flex w-full items-center gap-2 rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-sm transition-colors duration-200 ${
           active
-            ? "bg-[var(--vscode-tab)] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-            : "text-muted hover:bg-white/5 hover:text-ink"
+            ? "bg-[var(--vscode-tab)] text-ink shadow-[inset_0_1px_0_var(--panel-sheen)]"
+            : "text-muted hover:bg-[var(--hover-wash)] hover:text-ink"
         }`}
         style={getExplorerPadding(depth, FILE_ROW_OFFSET)}
       >
@@ -519,7 +519,7 @@ function ExplorerNodeRow({
         type="button"
         onClick={() => onToggleFolder(node.id)}
         className={`flex w-full items-center gap-2 rounded-[var(--radius-sm)] px-2 py-1.5 text-left text-sm transition-colors duration-200 ${
-          active ? "text-ink" : "text-muted hover:bg-white/5 hover:text-ink"
+          active ? "text-ink" : "text-muted hover:bg-[var(--hover-wash)] hover:text-ink"
         }`}
         style={getExplorerPadding(depth, FOLDER_ROW_OFFSET)}
         aria-expanded={open}
@@ -641,7 +641,7 @@ function ExplorerPanel({
                   className={`w-full rounded-[var(--radius-sm)] border px-3 py-2 text-left transition-colors duration-200 ${
                     activeSearchIndex === index
                       ? "border-accent/35 bg-accent/10 text-ink"
-                      : "border-transparent text-muted hover:bg-white/5 hover:text-ink"
+                      : "border-transparent text-muted hover:bg-[var(--hover-wash)] hover:text-ink"
                   }`}
                 >
                   <p className="truncate font-mono text-[12px] text-inherit">
@@ -657,7 +657,7 @@ function ExplorerPanel({
               ))}
             </div>
           ) : (
-            <div className="rounded-[var(--radius-md)] border border-dashed border-line bg-white/2 px-4 py-5">
+            <div className="rounded-[var(--radius-md)] border border-dashed border-line bg-[var(--hover-wash)] px-4 py-5">
               <p className="text-sm text-ink">No page matched that search.</p>
               <p className="mt-1 text-xs leading-6 text-muted">
                 Try a title, slug, folder, or any path fragment.
@@ -1221,7 +1221,7 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
                 style={{
                   background: isResizingExplorer
                     ? "rgb(var(--accent) / 0.75)"
-                    : "rgb(255 255 255 / 0.08)",
+                    : "var(--vscode-border)",
                 }}
               />
               <span className="sr-only">Resize sidebar</span>
@@ -1231,7 +1231,7 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
 
         {isMobileExplorerOpen ? (
           <div
-            className="fixed inset-0 z-[65] bg-black/55 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-[65] bg-[var(--scrim)] backdrop-blur-sm md:hidden"
             role="presentation"
             onClick={() => setIsMobileExplorerOpen(false)}
           >
@@ -1360,7 +1360,7 @@ export function VSCodeWorkspace({ theme, onThemeChange }: VSCodeWorkspaceProps) 
 
       {isSettingsOpen ? (
         <div
-          className="fixed inset-0 z-[70] bg-black/50 p-4 backdrop-blur-sm sm:p-6"
+          className="fixed inset-0 z-[70] bg-[var(--scrim)] p-4 backdrop-blur-sm sm:p-6"
           role="presentation"
           onClick={() => setIsSettingsOpen(false)}
         >

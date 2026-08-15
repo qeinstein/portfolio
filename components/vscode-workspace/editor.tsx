@@ -116,7 +116,7 @@ function TabButton({
       <button
         type="button"
         onClick={onClose}
-        className={`inline-flex h-7 w-7 items-center justify-center rounded-md transition-all duration-200 hover:bg-white/5 hover:text-ink focus-visible:opacity-100 ${
+        className={`inline-flex h-7 w-7 items-center justify-center rounded-md transition-all duration-200 hover:bg-[var(--hover-wash)] hover:text-ink focus-visible:opacity-100 ${
           active
             ? "text-ink/80"
             : "text-muted opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
@@ -240,7 +240,7 @@ export function VSCodeEditor({
               <button
                 type="button"
                 onClick={() => onCompare(activeTab.fileId)}
-                className="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted hover:bg-white/5 hover:text-ink sm:h-8 sm:w-8"
+                className="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted hover:bg-[var(--hover-wash)] hover:text-ink sm:h-8 sm:w-8"
                 aria-label="Compare file"
                 title="Compare file"
               >
@@ -249,7 +249,7 @@ export function VSCodeEditor({
               <button
                 type="button"
                 onClick={() => onSplitRight(groupId, activeTab.id)}
-                className="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted hover:bg-white/5 hover:text-ink sm:h-8 sm:w-8"
+                className="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted hover:bg-[var(--hover-wash)] hover:text-ink sm:h-8 sm:w-8"
                 aria-label="Split editor right"
                 title="Split editor right"
               >

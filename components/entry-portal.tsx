@@ -85,6 +85,15 @@ export function EntryPortal({ onEnter }: EntryPortalProps) {
     const surface = parseCssRgb(
       getComputedStyle(document.documentElement).getPropertyValue("--surface")
     );
+    // A black vignette only deepens edges on a dark stage; on paper it reads as
+    // grime, so the tone and strength are both theme tokens.
+    const vignette = parseCssRgb(
+      getComputedStyle(document.documentElement).getPropertyValue("--vignette-rgb")
+    );
+    const vignetteAlpha =
+      Number.parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--vignette-alpha")
+      ) || 0.55;
 
     const dpr = clamp(window.devicePixelRatio ?? 1, 1, 2);
     canvas.width = Math.floor(size.width * dpr);
@@ -140,8 +149,11 @@ export function EntryPortal({ onEnter }: EntryPortalProps) {
         cy,
         Math.max(w, h) * 0.7
       );
-      gradient.addColorStop(0, `rgba(0,0,0,0)`);
-      gradient.addColorStop(1, `rgba(0,0,0,0.55)`);
+      gradient.addColorStop(0, `rgba(${vignette.r},${vignette.g},${vignette.b},0)`);
+      gradient.addColorStop(
+        1,
+        `rgba(${vignette.r},${vignette.g},${vignette.b},${vignetteAlpha})`
+      );
       context.fillStyle = gradient;
       context.fillRect(0, 0, w, h);
 

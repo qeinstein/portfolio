@@ -2,7 +2,7 @@ const e=`---
 title: Delta
 excerpt: A local-first autonomous agent platform built with a friend — combining recursive planning, persistent memory, sandboxed execution, and an optional control plane for team deployments.
 published: true
-featured: true
+featured: false
 tags: [agents, autonomy, local ai, orchestration]
 stack: [Python, Gemini, SQLite, Docker, FastAPI, PostgreSQL]
 role: Co-engineer

@@ -24,10 +24,10 @@ export const portfolio = {
     name: "Toheeb Goodluck Ogunade",
     titles: "Software Engineer · AI Researcher · Quantum Computing",
     email: "ogunadetoheeb4@gmail.com",
-    linkedin: "https://www.linkedin.com/in/toheeb-ogunade-442051287/",
+    linkedin: "https://www.linkedin.com/in/toheeb-ogunade",
     github: "https://github.com/qeinstein",
     githubDirect: "https://github.com/qeinstein",
-    x: "https://x.com/Lil_Tee18",
+    x: "https://x.com/uqnautm",
     location: "Lagos, Nigeria",
     education: "BSc Computer Science, University of Lagos (Expected Jan 2028)"
   },
@@ -36,19 +36,19 @@ export const portfolio = {
     subheadline: "Hi, I'm Toheeb. I'm a software engineer and researcher building at the intersection of scalable backend systems, AI agents, and quantum computing."
   },
   about:
-    "I focus on building reliable software with clear boundaries, predictable failure modes, and good operational ergonomics. I'd rather build designs that make tradeoffs explicit—valuing capacity, backpressure, and deterministic execution—over abstractions that pretend complexity doesn't exist. I'm also exploring quantum computing mechanics alongside AI safety, and I like writing detailed reports on what I learn.",
+    "I like understanding things deeply. Sometimes that means building software, sometimes it means following a mathematical idea, and sometimes it means sitting with a question long enough to discover that the first answer was wrong. Most of what I work on begins with curiosity and ends, if I\u2019m lucky, with something I can build, test, or explain.",
   experience: [
     {
-      company: "OysterSkin",
-      role: "AI/ML & Backend Integration Engineer (Contract)",
-      period: "Jul 2025 – Jan 2026",
+      company: "Moniepoint",
+      role: "Software Engineering Intern (Fraud Monitoring Team)",
+      period: "Jun 2026 – Dec 2026",
       summary:
-        "Engineered live recommendation models and backend infrastructure, restructuring database performance and feature extraction loops.",
+        "Building observability infrastructure for the fraud monitoring team, from OpenTelemetry pipelines to cross-environment deployments.",
       details: [
-        "Engineered and deployed production ML models for personalized recommendation, reducing model retraining cycle times by 30% through automated feature extraction pipeline design.",
-        "Built low-latency inference infrastructure integrating ML models into high-availability web services via Python and FastAPI.",
-        "Conducted A/B testing and statistical model evaluation to optimize predictive accuracy and drive user retention metrics.",
-        "Optimized data pipelines and PostgreSQL relational schemas, reducing processing latency and query execution times."
+        "Engineered and integrated an OpenTelemetry (OTel) observability pipeline using NestJS and Node.js, deploying over 1,400 lines of infrastructure code to enable full-stack traceability for core operations.",
+        "Developed a centralized observability service that processed 500+ unique telemetry events per second, directly feeding compressed data into New Relic for immediate anomaly detection.",
+        "Implemented a global HTTP trace interceptor and console logger, embedding trace IDs directly into every log line to streamline cross-service debugging and reduce root-cause analysis bottlenecks by 40%.",
+        "Orchestrated secure cross-environment deployments across 3 active environments by managing Docker ConfigMaps and environment variables, accelerating development speed and ensuring zero disruption to existing CI/CD pipelines."
       ],
       featured: true
     },
@@ -62,19 +62,6 @@ export const portfolio = {
         "Built and shipped production-ready internal tooling using React and Node.js/Express across fast-paced sprint cycles, owning features end-to-end.",
         "Containerized RESTful microservices using Docker, reducing integration overhead by 25% and enforcing deployment determinism across CI/CD pipelines.",
         "Designed normalized PostgreSQL schemas supporting high-throughput read/write operations across distributed application layers."
-      ],
-      featured: true
-    },
-    {
-      company: "Curacel",
-      role: "AI & API Engineering Intern",
-      period: "Apr 2025 – May 2025",
-      summary:
-        "Contributed to machine learning pipelines for claims auditing and refactored high-throughput API integrations.",
-      details: [
-        "Engineered ML modules for automated health insurance claims processing and high-precision fraud detection.",
-        "Won Best AI Innovation at the Curacel Hackathon (2024) for a multilingual healthcare AI assistant with NLP-driven anomaly detection.",
-        "Collaborated with senior engineers to diagnose and refactor microservice architectures, measurably improving API response times for high-volume, real-time health data streams."
       ],
       featured: true
     },

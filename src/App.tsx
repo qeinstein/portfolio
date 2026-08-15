@@ -6,7 +6,6 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
 import { HomePage } from "@/src/pages/home-page";
-import { WhoIAmPage } from "@/src/pages/who-i-am-page";
 import { ProjectsPage } from "@/src/pages/projects-page";
 import { ProjectPage } from "@/src/pages/project-page";
 import { BlogPage } from "@/src/pages/blog-page";
@@ -36,7 +35,7 @@ export function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
-    const themeColor = theme === "vscode-light" ? "#f9fafb" : "#18181b";
+    const themeColor = theme === "vscode-light" ? "#fafbfd" : "#08090b";
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", themeColor);
   }, [theme]);
 
@@ -58,10 +57,9 @@ export function App() {
     <div className="min-h-screen bg-canvas font-sans text-ink antialiased flex flex-col transition-colors duration-200">
       <RouteEffects />
       <SiteHeader theme={mappedTheme} onToggleTheme={toggleTheme} />
-      <main className="flex-1 w-full max-w-5xl mx-auto px-6 md:px-8 py-6">
+      <main className="flex-1 w-full max-w-5xl mx-auto px-6 md:px-8 py-4">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/who-i-am" element={<WhoIAmPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/blog" element={<BlogPage />} />

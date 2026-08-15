@@ -46,9 +46,15 @@ export function SectionShell({
               viewport={{ once: true, amount: 0.8 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             />
-            <h2 className="text-xl font-medium tracking-tight text-ink md:text-2xl">
+            <motion.h2
+              className="text-xl font-medium tracking-tight text-ink md:text-2xl"
+              initial={{ opacity: 0, x: -6 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.8 }}
+              transition={{ duration: 0.45, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
+            >
               {title}
-            </h2>
+            </motion.h2>
           </div>
         </div>
         {layout === "stacked" ? action : null}
