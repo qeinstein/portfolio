@@ -95,7 +95,7 @@ export function HeroComponent() {
           transition={{ delay: 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           {/* Portrait emerging from the wave-manifold field */}
-          <div className="group relative aspect-[4/5] w-[280px] sm:w-[320px] md:w-[360px]">
+          <div className="group relative aspect-[4/5] w-[280px] max-w-full sm:w-[320px] md:w-[360px]">
             {/* Ambient accent bloom behind the subject */}
             <motion.div
               aria-hidden="true"
