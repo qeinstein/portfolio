@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 import { portfolio } from "@/lib/portfolio-data";
-import { QuantumCanvas } from "@/components/quantum-canvas";
 
 export function HeroComponent() {
   const reduced = useReducedMotion();
@@ -110,10 +109,6 @@ export function HeroComponent() {
               }
             />
 
-            <div className="absolute inset-0 flex items-center justify-center">
-              <QuantumCanvas />
-            </div>
-
             {/* Slow drift keeps the portrait alive without pulling focus */}
             <motion.div
               className="pointer-events-none absolute inset-0 z-10"
@@ -131,7 +126,7 @@ export function HeroComponent() {
                 height={1536}
                 loading="eager"
                 decoding="async"
-                className="absolute inset-x-0 bottom-0 h-[88%] w-full object-cover object-bottom"
+                className="absolute inset-0 h-full w-full object-cover object-bottom"
                 style={{
                   maskImage:
                     "linear-gradient(to top, rgb(0 0 0) 82%, rgb(0 0 0 / 0) 100%)",

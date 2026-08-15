@@ -92,10 +92,7 @@
   --body-glow: rgb(var(--accent) / 0.08);
   --panel-sheen: rgb(255 255 255 / 0.03);
   --hover-wash: rgb(255 255 255 / 0.05);
-  --mesh-rgb: 99 102 241;
-  --mesh-alpha: 0.32;
   --selection-alpha: 0.24;
-  --caption-opacity: 0.35;
   --scrim: rgb(0 0 0 / 0.55);
   --cta-shadow: 0 4px 12px rgb(var(--accent) / 0.25);
   --dot-glow: 0 0 10px rgb(var(--accent) / 0.3);
@@ -154,10 +151,7 @@ html[data-theme="one-dark-pro-night-flat"] {
   --body-glow: rgb(var(--accent) / 0.08);
   --panel-sheen: rgb(255 255 255 / 0.03);
   --hover-wash: rgb(255 255 255 / 0.05);
-  --mesh-rgb: 99 102 241;
-  --mesh-alpha: 0.32;
   --selection-alpha: 0.24;
-  --caption-opacity: 0.35;
   --scrim: rgb(0 0 0 / 0.55);
   --cta-shadow: 0 4px 12px rgb(var(--accent) / 0.25);
   --dot-glow: 0 0 10px rgb(var(--accent) / 0.3);
@@ -213,7 +207,6 @@ html[data-theme="vscode-light"] {
   --panel-sheen: rgb(var(--accent) / 0.035);
   --hover-wash: rgb(15 23 42 / 0.045);
   --selection-alpha: 0.18;
-  --caption-opacity: 0.62;
 
   /* Glows are an additive, dark-background idiom. On paper they read as smudges,
      so light mode trades each one for crisp elevation or a hard ring. */
@@ -225,10 +218,6 @@ html[data-theme="vscode-light"] {
   --vignette-rgb: 15 23 42;
   --vignette-alpha: 0.1;
   --danger: 220 38 38;
-
-  /* The mesh must go darker and denser to survive a white backdrop. */
-  --mesh-rgb: 67 56 202;
-  --mesh-alpha: 0.5;
 
   /* Cool, tight, low-opacity shadows: black at dark-mode strength reads as
      dirt on white. */

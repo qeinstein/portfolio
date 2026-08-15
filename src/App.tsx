@@ -1,17 +1,33 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import { RouteEffects } from "@/components/route-effects";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
+// The landing route stays eager so first paint needs no extra round trip.
 import { HomePage } from "@/src/pages/home-page";
-import { ProjectsPage } from "@/src/pages/projects-page";
-import { ProjectPage } from "@/src/pages/project-page";
-import { BlogPage } from "@/src/pages/blog-page";
-import { BlogPostPage } from "@/src/pages/blog-post-page";
-import { ExperiencePage } from "@/src/pages/experience-page";
-import { NotFoundPage } from "@/src/pages/not-found-page";
+
+// Everything else is split out: the project and blog readers pull in the whole
+// markdown + syntax-highlighting stack, which the home page never renders.
+const ProjectsPage = lazy(() =>
+  import("@/src/pages/projects-page").then((m) => ({ default: m.ProjectsPage }))
+);
+const ProjectPage = lazy(() =>
+  import("@/src/pages/project-page").then((m) => ({ default: m.ProjectPage }))
+);
+const BlogPage = lazy(() =>
+  import("@/src/pages/blog-page").then((m) => ({ default: m.BlogPage }))
+);
+const BlogPostPage = lazy(() =>
+  import("@/src/pages/blog-post-page").then((m) => ({ default: m.BlogPostPage }))
+);
+const ExperiencePage = lazy(() =>
+  import("@/src/pages/experience-page").then((m) => ({ default: m.ExperiencePage }))
+);
+const NotFoundPage = lazy(() =>
+  import("@/src/pages/not-found-page").then((m) => ({ default: m.NotFoundPage }))
+);
 
 export type ThemeName =
   | "one-dark-pro-night-flat"
@@ -58,6 +74,7 @@ export function App() {
       <RouteEffects />
       <SiteHeader theme={mappedTheme} onToggleTheme={toggleTheme} />
       <main className="flex-1 w-full max-w-5xl mx-auto px-6 md:px-8 py-4">
+        <Suspense fallback={<div className="min-h-[60vh]" aria-hidden="true" />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
@@ -67,6 +84,7 @@ export function App() {
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        </Suspense>
       </main>
       <SiteFooter />
     </div>

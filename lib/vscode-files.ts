@@ -28,10 +28,6 @@ function normalizePathname(pathname: string) {
   return trimmed === "" ? "/" : trimmed;
 }
 
-function stripFrontmatter(raw: string) {
-  return raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "").trim();
-}
-
 function toExperienceMarkdown() {
   const lines: string[] = [];
   lines.push("# Experience");
