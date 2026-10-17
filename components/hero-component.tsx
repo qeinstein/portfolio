@@ -120,7 +120,7 @@ export function HeroComponent() {
               }
             >
               <img
-                src="/toheeb-ogunade.jpg"
+              src="/toheeb-ogunade.png"
                 alt={portfolio.meta.name}
                 width={1152}
                 height={1536}

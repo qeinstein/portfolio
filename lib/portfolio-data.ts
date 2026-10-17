@@ -15,25 +15,28 @@ export type Publication = {
   date: string;
   link: string;
   codeLink?: string;
+  preview?: string;
+  pdfLink?: string;
   summary: string;
   findings: string[];
 };
 
 export const portfolio = {
   meta: {
-    name: "Toheeb Goodluck Ogunade",
-    titles: "Software Engineer · AI Researcher · Quantum Computing",
+    name: "Toheeb Ogunade",
+    titles: "Researching quantum computing to transform artificial intelligence",
     email: "ogunadetoheeb4@gmail.com",
-    linkedin: "https://www.linkedin.com/in/toheeb-ogunade",
+    linkedin: "https://linkedin.com/in/toheeb-ogunade",
     github: "https://github.com/qeinstein",
     githubDirect: "https://github.com/qeinstein",
+    scholar: "https://scholar.google.com/citations?user=8e_L8i0AAAAJ&hl=en",
     x: "https://x.com/uqnautm",
     location: "Lagos, Nigeria",
-    education: "BSc Computer Science, University of Lagos (Expected Jan 2028)"
+    education: "B.S. Computer Sciences, University of Lagos (Sep 2024 – present)"
   },
   hero: {
-    headline: "Toheeb Goodluck Ogunade",
-    subheadline: "Hi, I'm Toheeb. I'm a software engineer and researcher building at the intersection of scalable backend systems, AI agents, and quantum computing."
+    headline: "Toheeb Ogunade",
+    subheadline: "Researching quantum computing to transform artificial intelligence."
   },
   about:
     "I like understanding things deeply. Sometimes that means building software, sometimes it means following a mathematical idea, and sometimes it means sitting with a question long enough to discover that the first answer was wrong. Most of what I work on begins with curiosity and ends, if I\u2019m lucky, with something I can build, test, or explain.",
@@ -80,13 +83,25 @@ export const portfolio = {
   ] satisfies Experience[],
   publications: [
     {
+      title: "Structure, Association, and Decision Value: Representation-Based Difficulty Estimation for Adaptive Inference in African-Language NLI",
+      authors: "Toheeb Ogunade",
+      journal: "arXiv:2608.19003",
+      date: "Aug 2026",
+      link: "https://arxiv.org/abs/2608.19003",
+      pdfLink: "https://arxiv.org/pdf/2608.19003",
+      preview: "/publications/adaptive-inference.png",
+      summary: "Can representation statistics tell us when a model needs more computation? A study across 15 African languages separates statistical association from useful routing decisions.",
+      findings: []
+    },
+    {
       title: "A Matched Spectral Benchmark of Quantum Inspired Feature Maps",
-      authors: "Toheeb Goodluck Ogunade, Taofeek Kassim, Etinosa Osaro",
+    authors: "Toheeb Ogunade, Taofeek Kassim, Etinosa Osaro",
       journal: "arXiv:2605.24324",
       date: "May 2026",
       link: "https://arxiv.org/abs/2605.24324",
-      codeLink: "https://github.com/qeinstein",
-      summary: "Designed and executed a 10-dataset, 110+-run empirical benchmark comparing amplitude, angle, and basis Quantum Information Encoding (QIE) techniques against 5 matched classical baselines under controlled parameters using PyTorch and TensorFlow.",
+      pdfLink: "https://arxiv.org/pdf/2605.24324",
+      preview: "/publications/quantum-feature-maps.png",
+    summary: "An empirical study of amplitude, angle, and basis encodings against matched classical feature maps across ten datasets. It evaluates both predictive performance and representation geometry, finding that fixed quantum-inspired encodings alone do not provide a reliable advantage on classical data.",
       findings: [
         "Ran 30 paired statistical comparisons (t-test + Wilcoxon + Cohen’s d): 27/30 significantly worse, 0 wins.",
         "Attributed QIE failures via spectral diagnostics: amplitude rank collapse (erank ↓ 1.04, κ ↑ 5.7 × 10^9), angle geometric equivalence to linear feature spaces (CKA ≥ 0.95 on 7/10 datasets), and basis Hamming geometry mismatch.",
@@ -97,8 +112,9 @@ export const portfolio = {
       title: "Context Collapse in LLMs: Semantic Interference vs. Context Length",
       authors: "Toheeb Goodluck Ogunade",
       journal: "Published on Medium",
+      preview: "/publications/context-collapse.png",
       date: "Mar 2026",
-      link: "https://medium.com/@ogunadetoheeb4/context-collapse-why-semantic-interference-breaks-llms-before-token-limits-do-ce48a23b29d2",
+      link: "https://medium.com/@uqnautm/context-collapse-why-semantic-interference-breaks-llms-before-token-limits-do-ce48a23b29d2",
       codeLink: "https://github.com/qeinstein/context_collapse",
       summary: "Ran 560 controlled trials across arithmetic, retrieval, logic, and instruction-following tasks to examine how random background context versus semantically related noise impacts LLM precision.",
       findings: [

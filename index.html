@@ -8,19 +8,19 @@
     />
     <meta
       name="description"
-      content="Portfolio of Toheeb Goodluck Ogunade, focused on backend systems, distributed systems, and applied AI."
+      content="Toheeb Ogunade is a computer science undergraduate at the University of Lagos researching quantum computing and machine learning."
     />
     <meta
       name="theme-color"
-      content="#0a0a0a"
+      content="#f0e8d9"
     />
     <meta
       property="og:title"
-      content="Toheeb Goodluck Ogunade | Backend, Distributed Systems, and AI"
+      content="Toheeb Ogunade | Quantum Computing & AI Research"
     />
     <meta
       property="og:description"
-      content="Portfolio of Toheeb Goodluck Ogunade, focused on backend systems, distributed systems, and applied AI."
+      content="Toheeb Ogunade is a computer science undergraduate at the University of Lagos researching quantum computing and machine learning."
     />
     <meta
       property="og:type"
@@ -32,7 +32,7 @@
     />
     <meta
       property="og:site_name"
-      content="Toheeb Goodluck Ogunade"
+      content="Toheeb Ogunade"
     />
     <meta
       name="twitter:card"
@@ -40,49 +40,37 @@
     />
     <meta
       name="twitter:title"
-      content="Toheeb Goodluck Ogunade | Backend, Distributed Systems, and AI"
+      content="Toheeb Ogunade | Quantum Computing & AI Research"
     />
     <meta
       name="twitter:description"
-      content="Portfolio of Toheeb Goodluck Ogunade, focused on backend systems, distributed systems, and applied AI."
+      content="Toheeb Ogunade is a computer science undergraduate at the University of Lagos researching quantum computing and machine learning."
     />
     <meta
       name="twitter:image"
       content="/og-image.svg"
     />
+    <script>
+      (() => {
+        let theme;
+        try { theme = localStorage.getItem("portfolio-theme"); } catch {}
+        const dark = theme === "dark" || (theme !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document.querySelector('meta[name="theme-color"]').content = dark ? "#1e1e1e" : "#f0e8d9";
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
       rel="icon"
       type="image/svg+xml"
-      href="/favicon.svg"
+      href="/favicon.svg?v=3"
     />
-    <title>Toheeb Goodluck Ogunade</title>
-    <script>
-      const redirectPath = sessionStorage.getItem("portfolio_redirect_path");
-
-      if (redirectPath) {
-        sessionStorage.removeItem("portfolio_redirect_path");
-        window.history.replaceState(null, "", redirectPath);
-      }
-
-      const savedTheme = localStorage.getItem("theme");
-      const validThemes = new Set([
-        "one-dark-pro-night-flat",
-        "vscode-dark",
-        "vscode-light",
-        "github-dark",
-        "nord",
-        "monokai"
-      ]);
-      document.documentElement.dataset.theme = validThemes.has(savedTheme)
-        ? savedTheme
-        : "one-dark-pro-night-flat";
-    </script>
+    <title>Toheeb Ogunade | Quantum Computing &amp; AI Research</title>
   </head>
   <body>
     <div id="root"></div>
