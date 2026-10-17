@@ -86,7 +86,7 @@ export function HomePage() {
             since we missed out on the AI era.
           </p>
           <p>
-            I’m a B.S. Computer Sciences student at the <a href="https://unilag.edu.ng/" target="_blank" rel="noreferrer">University of Lagos</a>
+            I’m a B.S. Computer Sciences student at the <a href="https://unilag.edu.ng/" target="_blank" rel="noreferrer">University of Lagos</a>{" "}
             and an early career researcher. My recent work tested amplitude,
             angle, and basis encodings as feature maps for classical machine
             learning. Across ten datasets, I compared them with matched
