@@ -66,6 +66,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--link); outline-
 .portrait { width: 158px; aspect-ratio: 1; overflow: hidden; border-radius: 50%; background: var(--hover); }
 .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 48%; transform: scale(2.25) translateY(4%); }
 .identity h1 { color: var(--ink); font-size: 34px; font-weight: 600; line-height: 1.2; letter-spacing: -0.035em; }
+.role-line { margin-top: 4px; color: var(--muted); font-size: 13px; line-height: 1.6; }
 .tagline { max-width: 440px; margin-top: 10px; color: var(--body); font-size: 15px; line-height: 1.65; }
 .social-links { display: flex; align-items: center; gap: 6px; margin-top: 10px; margin-left: -10px; }
 .social-links a { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 50%; color: var(--muted); background-image: none; transition: color 180ms ease, background-color 180ms ease; }

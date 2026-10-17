@@ -66,6 +66,9 @@ export function HomePage() {
           </figure>
           <div className="identity">
             <h1 id="page-title">{portfolio.meta.name}</h1>
+            <p className="role-line">
+              Founder and CEO @ <a href="https://noxquantum.com" target="_blank" rel="noreferrer">NoxQuantum</a>
+            </p>
             <p className="tagline">{portfolio.meta.titles}.</p>
             <SocialLinks />
           </div>
@@ -73,29 +76,35 @@ export function HomePage() {
 
         <section id="biography" className="bio-copy" aria-label="Biography">
           <p>
-            I’m a computer science undergraduate at the <a href="https://unilag.edu.ng/" target="_blank" rel="noreferrer">University of Lagos</a>,
-            where I study how quantum computing and machine learning might
-            inform one another. I’m especially interested in data
-            representation: what a model can learn from an encoding, what
-            information the encoding loses, and whether it helps beyond a
-            strong classical baseline.
+            Motivated by my personal experiences as an African, I conduct
+            research at the intersection of artificial intelligence (AI),
+            quantum machine learning (QML), and quantum algorithms. My mission
+            is to take fundamental principles from quantum computing and apply
+            them to artificial intelligence, to develop quantum algorithms that
+            will change the world, and to do research in quantum machine
+            learning. My end goal is to make Africa part of the quantum era,
+            since we missed out on the AI era.
           </p>
           <p>
-            My recent work tests amplitude, angle, and basis encodings as
-            feature maps for classical machine learning. Across ten datasets,
-            I compared them with matched classical methods and examined
-            predictive performance alongside effective rank, condition
-            number, and kernel alignment. This let me connect performance to
-            the geometry imposed by each representation, and explain why a
-            fixed encoding can fail to help.
+            I’m a B.S. Computer Sciences student at the <a href="https://unilag.edu.ng/" target="_blank" rel="noreferrer">University of Lagos</a>
+            and an early career researcher. My recent work tested amplitude,
+            angle, and basis encodings as feature maps for classical machine
+            learning. Across ten datasets, I compared them with matched
+            classical methods and examined predictive performance alongside
+            effective rank, condition number, and kernel alignment. This let me
+            connect performance to the geometry imposed by each representation,
+            and explain why a fixed encoding can fail to help.
           </p>
           <p>
-            I’m working toward a career in research, with a focus on quantum
-            machine learning and the foundations of useful AI. I value careful
-            comparisons, transparent experiments, and explanations that make
-            clear what a result does—and does not—show. I’m pursuing a B.S. in
-            Computer Sciences at the University of Lagos, where I’ve been studying
-            since September 2024.
+            I’m deeply excited about revolutionising the quantum age in Africa.
+            When I’m not coding or reading, I love football and solving
+            mathematical problems—a hobby that earned me a spot at the state
+            math olympiad. I also enjoy driving, nature meditation, and poetry.
+          </p>
+          <p>
+            I’m aiming high: someday, I want to win a Nobel Prize, a Turing
+            Award, or both—for work that helps Africa take its place in the
+            quantum era.
           </p>
         </section>
       </section>
