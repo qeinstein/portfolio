@@ -67,7 +67,7 @@ export function HomePage() {
           <div className="identity">
             <h1 id="page-title">{portfolio.meta.name}</h1>
             <p className="role-line">
-              Founder and CEO @ <a href="https://noxquantum.com" target="_blank" rel="noreferrer">NoxQuantum</a>
+              Co-founder and CEO @ <a href="https://noxquantum.com" target="_blank" rel="noreferrer">NoxQuantum</a>
             </p>
             <p className="tagline">{portfolio.meta.titles}.</p>
             <SocialLinks />
@@ -76,35 +76,48 @@ export function HomePage() {
 
         <section id="biography" className="bio-copy" aria-label="Biography">
           <p>
-            Motivated by my personal experiences as an African, I conduct
-            research at the intersection of artificial intelligence (AI),
-            quantum machine learning (QML), and quantum algorithms. My mission
-            is to take fundamental principles from quantum computing and apply
-            them to artificial intelligence, to develop quantum algorithms that
-            will change the world, and to do research in quantum machine
-            learning. My end goal is to make Africa part of the quantum era,
-            since we missed out on the AI era.
+            I'm an early-career researcher working at the intersection of
+            quantum computing and artificial intelligence, with particular
+            interests in quantum machine learning and quantum algorithms. I'm
+            interested in understanding how principles from quantum computing
+            can lead to new ways of learning, representing information, and
+            solving computational problems.
           </p>
           <p>
-            I’m a B.S. Computer Sciences student at the <a href="https://unilag.edu.ng/" target="_blank" rel="noreferrer">University of Lagos</a>{" "}
-            and an early career researcher. My recent work tested amplitude,
-            angle, and basis encodings as feature maps for classical machine
-            learning. Across ten datasets, I compared them with matched
-            classical methods and examined predictive performance alongside
-            effective rank, condition number, and kernel alignment. This let me
-            connect performance to the geometry imposed by each representation,
-            and explain why a fixed encoding can fail to help.
+            My motivation is also personal. Growing up in Africa, I've seen how
+            limited access to computing resources and research infrastructure can
+            constrain scientific progress. I want to help make Africa a place
+            where fundamental advances in quantum computing are made, not just
+            adopted.
           </p>
           <p>
-            I’m deeply excited about revolutionising the quantum age in Africa.
-            When I’m not coding or reading, I love football and solving
-            mathematical problems—a hobby that earned me a spot at the state
-            math olympiad. I also enjoy driving, nature meditation, and poetry.
+            I'm currently pursuing a B.S. in Computer Science at the{" "}
+            <a href="https://unilag.edu.ng/" target="_blank" rel="noreferrer">
+              University of Lagos
+            </a>{" "}
+            and am the co-founder and CEO of{" "}
+            <a href="https://noxquantum.com" target="_blank" rel="noreferrer">
+              NoxQuantum
+            </a>
+            , where we're researching new algorithms to make large AI models more
+            computationally efficient.
           </p>
           <p>
-            I’m aiming high: someday, I want to win a Nobel Prize, a Turing
-            Award, or both—for work that helps Africa take its place in the
-            quantum era.
+            My recent research investigated how quantum-inspired representations
+            affect classical machine learning. I compared amplitude, angle, and
+            basis encodings against matched classical methods across ten
+            datasets, examining both predictive performance and the underlying
+            geometry of each representation. The findings showed that these
+            encodings do not inherently offer an advantage, and helped me
+            understand how the structure imposed by a representation can
+            influence what a model learns.
+          </p>
+          <p>
+            Outside research, I enjoy football, mathematics, driving, nature,
+            and poetry. My interest in mathematics once took me to the state
+            Mathematics Olympiad. I dream of making discoveries worthy of a
+            Turing Award or Nobel Prize, and helping Africa play a defining role
+            in the quantum era.
           </p>
         </section>
       </section>
